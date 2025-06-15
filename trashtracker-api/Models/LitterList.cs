@@ -2,6 +2,6 @@
 {
     public class LitterList
     {
-        List<Litter> Litters;
+        public List<Litter> Litters;
     }
 }

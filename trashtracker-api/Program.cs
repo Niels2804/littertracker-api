@@ -1,7 +1,6 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using trashtracker_api.Repositories;
 
@@ -32,7 +31,6 @@ builder.Services
     });
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 // Adding Swagger Service for API documentation

@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace trashtracker_api.Models
+﻿namespace trashtracker_api.Models.Dto
 {
-    public class User
+    public class UserDto
     {
         public Guid Id { get; set; }
-        [Required(ErrorMessage = "Missing IdentityUserID")]
-        public Guid IdentityUserId { get; set; }
+        public string? IdentityUserId { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
         public string? Username { get; set; }

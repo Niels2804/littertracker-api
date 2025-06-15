@@ -2,6 +2,6 @@
 {
     public class HolidayList
     {
-        List<Holiday> Holidays;
+        public List<Holiday> Holidays;
     }
 }

@@ -2,6 +2,6 @@
 {
     public class Prediction
     {
-        int TotalLitter;
+        public int TotalLitter { get; set; }
     }
 }

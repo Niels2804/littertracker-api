@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 using trashtracker_api.Models;
+using trashtracker_api.Models.Dto;
 
 namespace trashtracker_api.Repositories
 {
@@ -24,7 +25,7 @@ namespace trashtracker_api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUserByUserIDAsync(Guid identityUserId)
+        public Task<UserDto> GetUserByUserIDAsync(Guid identityUserId)
         {
             throw new NotImplementedException();
         }

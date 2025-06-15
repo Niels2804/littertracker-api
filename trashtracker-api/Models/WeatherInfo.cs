@@ -2,9 +2,9 @@
 {
     public class WeatherInfo
     {
-        Guid Id;
-        float TemperatureCelsius;
-        float Humidity;
-        string Conditions;
+        public Guid Id { get; set; }
+        public float TemperatureCelsius { get; set; }
+        public float Humidity { get; set; }
+        public string Conditions { get; set; }
     }
 }

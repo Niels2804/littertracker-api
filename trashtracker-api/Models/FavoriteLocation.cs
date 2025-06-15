@@ -2,8 +2,8 @@
 {
     public class FavoriteLocation
     {
-        Guid Id;
-        Guid UserId;
-        Guid LitterId;
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid LitterId { get; set; }
     }
 }
