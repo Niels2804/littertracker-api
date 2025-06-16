@@ -39,20 +39,7 @@ namespace trashtracker_api.Controllers
             if (user == null)
                 return NotFound();
 
-            // Mapping
-            var mappedUser = new User()
-            {
-                Id = user.Id,
-                IdentityUserId = Guid.Parse(user.IdentityUserId),
-                Email = user.Email,
-                Password = user.Password,
-                Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Role = user.Role
-            };
-
-            return Ok(mappedUser);
+            return Ok(user);
         }
         // UPDATE
 

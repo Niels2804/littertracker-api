@@ -31,11 +31,11 @@ namespace trashtracker_api.Controllers
         public async Task<ActionResult<Litter>> GetAllLitter()
     
         {
-            var enviroment = await _litterRepository.GetAllLitterAsync();
-            if (enviroment == null)
+            var litter = await _litterRepository.GetAllLitterAsync();
+            if (litter == null)
                 return NotFound();
 
-            return Ok(enviroment);
+            return Ok(litter);
         }
     }
 }

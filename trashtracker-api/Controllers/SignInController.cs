@@ -5,7 +5,7 @@ namespace trashtracker_api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SignInController
+    public class SignInController : ControllerBase
     {
         private IUserRepository _userRepository;
 
