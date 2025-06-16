@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 using trashtracker_api.Models;
+using trashtracker_api.Repositories.Interfaces;
 
 namespace trashtracker_api.Repositories
 {
@@ -12,7 +13,7 @@ namespace trashtracker_api.Repositories
             _dbConnection = dbConnection;
         }
 
-        public async Task<FavoriteLocation> GetFavoriteLocationsAsync(Guid favoriteLocationId)
+        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(Guid favoriteLocationId)
         {
             var sql = @"SELECT Id, UserId, LitterId, Rating
                     FROM [dbo].[FavoriteLocations]
@@ -20,7 +21,7 @@ namespace trashtracker_api.Repositories
             return await _dbConnection.QueryFirstOrDefaultAsync<FavoriteLocation>(sql, new { Id = favoriteLocationId });
         }
 
-        public async Task<FavoriteLocation> GetFavoriteLocationsAsync(Guid userId, Guid litterId)
+        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(Guid userId, Guid litterId)
         {
             var sql = @"SELECT Id, UserId, LitterId, Rating
                     FROM [dbo].[FavoriteLocations]

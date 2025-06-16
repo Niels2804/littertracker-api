@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
-using trashtracker_api.Repositories;
+using trashtracker_api.Repositories.Interfaces;
 
 namespace trashtracker_api.Controllers
 {
@@ -18,6 +19,7 @@ namespace trashtracker_api.Controllers
         // POST / CREATE
 
         [HttpPost(Name = "CreateFavoriteLocation")]
+        //[Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -50,12 +52,13 @@ namespace trashtracker_api.Controllers
                 return BadRequest("Failed to create a new favorite location");
             }
 
-            return CreatedAtRoute("GetFavoriteLocationsByUserId", new { identityUserId = created.UserId }, created);
+            return CreatedAtRoute(nameof(GetFavoriteLocationsByUserId), new { identityUserId = created.UserId }, created);
         }
 
         // GET / READ
 
         [HttpGet("{identityUserId:guid}", Name = "GetFavoriteLocationsByUserId")]
+        //[Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -79,6 +82,7 @@ namespace trashtracker_api.Controllers
         // UPDATE
 
         [HttpPut("{favoriteLocationId:guid}", Name = "UpdateFavoriteLocationsById")]
+        //[Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -109,6 +113,7 @@ namespace trashtracker_api.Controllers
         // DELETE
 
         [HttpDelete("{userId:guid}", Name = "DeleteAllFavoriteLocation")]
+        //[Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

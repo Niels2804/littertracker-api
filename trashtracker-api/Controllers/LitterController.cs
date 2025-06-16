@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
-using trashtracker_api.Repositories;
+using trashtracker_api.Repositories.interfaces;
 
 namespace trashtracker_api.Controllers
 {
@@ -13,28 +14,35 @@ namespace trashtracker_api.Controllers
         public LitterController(ILitterRepository litterRepository)
         {
             _litterRepository = litterRepository;
-
         }
+
+        // GET / READ
         
-        [HttpGet("{identityUserId:guid}", Name = "GetByLitterId")]
-        public async Task<ActionResult<Litter>> GetByLitterId([FromBody] Guid LitterId)
+        [HttpGet("{litterId:guid}", Name = "GetByLitterId")]
+        //[Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<Litter>> GetByLitterId([FromRoute] Guid litterId)
         {
-            var litter = await _litterRepository.GetByLitterIdAsync(LitterId);
-            
+            var litter = await _litterRepository.GetByLitterIdAsync(litterId);
             if (litter == null)
+            {
                 return NotFound();
-            
+            }
             return Ok(litter);
         }
 
         [HttpGet("GetAllLitter")]
+        //[Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Litter>> GetAllLitter()
-    
         {
             var litter = await _litterRepository.GetAllLitterAsync();
             if (litter == null)
+            {
                 return NotFound();
-
+            }
             return Ok(litter);
         }
     }

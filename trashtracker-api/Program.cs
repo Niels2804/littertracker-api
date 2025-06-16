@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.BearerToken;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using trashtracker_api.Repositories;
+using trashtracker_api.Repositories.interfaces;
+using trashtracker_api.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,13 +26,36 @@ if (string.IsNullOrWhiteSpace(sqlConnectionString))
     throw new InvalidProgramException("Configuration variable SqlConnectionString not found");
 }
 
-// Identity API with Dapper Stores
-//builder.Services
-//    .AddIdentityApiEndpoints<IdentityUser>()
-//    .AddDapperStores(options =>
-//    {
-//        options.ConnectionString = sqlConnectionString;
-//    });
+// Register repositories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ILitterRepository, LitterRepository>();
+builder.Services.AddScoped<IFavoriteLocationsRepository, FavoriteLocationsRepository>();
+
+// Authorization - Identity API with Dapper Stores
+builder.Services.AddAuthorization();
+builder.Services
+    .AddIdentityApiEndpoints<IdentityUser>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequiredLength = 10;
+    })
+    .AddDapperStores(options =>
+    {
+        options.ConnectionString = sqlConnectionString;
+    });
+
+builder.Services
+    .AddOptions<BearerTokenOptions>(IdentityConstants.BearerScheme)
+    .Configure(options =>
+    {
+        options.BearerTokenExpiration = TimeSpan.FromMinutes(60);
+    });
 
 // Controllers
 builder.Services.AddControllers();
@@ -44,15 +71,7 @@ builder.Services.AddScoped<IDbConnection>(sp =>
     return new SqlConnection(sqlConnectionString);
 });
 
-// Register repositories
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ILitterRepository, LitterRepository>();
-builder.Services.AddScoped<IFavoriteLocationsRepository, FavoriteLocationsRepository>();
-
 var app = builder.Build();
-
-// Map default Identity endpoints under /auth.
-//app.MapGroup("/auth").MapIdentityApi<IdentityUser>();
 
 app.MapGet("/", () => $"The API is up. Connection string found: {(sqlConnectionStringFound ? "Yes" : "No")}");
 
@@ -66,6 +85,25 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapControllers();
+
+// Map default Identity endpoints under /auth.
+app.MapGroup("/auth")
+    .MapIdentityApi<IdentityUser>();
+
+app.MapPost("/auth/logout",
+    async (SignInManager<IdentityUser> signInManager,
+    [FromBody] object empty) =>
+    {
+        if (empty != null)
+        {
+            await signInManager.SignOutAsync();
+            return Results.Ok();
+        }
+        return Results.Unauthorized();
+    })
+    .RequireAuthorization();
+
+app.MapControllers()
+    .RequireAuthorization();
 
 app.Run();

@@ -1,32 +1,59 @@
-﻿using trashtracker_api.Models;
+﻿using System.Data;
+using Dapper;
+using trashtracker_api.Models;
+using trashtracker_api.Repositories.interfaces;
 
 namespace trashtracker_api.Repositories
 {
     public class LitterRepository : ILitterRepository
     {
-        public Task CreateLitterAsync(Litter litter)
+        private readonly IDbConnection _dbConnection;
+        public LitterRepository(IDbConnection dbConnection)
         {
-            throw new NotImplementedException();
+            _dbConnection = dbConnection;
         }
 
-        public Task DeleteLitterAsync(Guid LitterId)
+        public async Task<Litter> CreateLitterAsync(Litter litter)
         {
-            throw new NotImplementedException();
+            var sql = @"
+                    INSERT INTO [dbo].[Litter] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
+                    VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
+            await _dbConnection.ExecuteAsync(sql, litter);
+            return litter;
         }
 
-        public Task<Litter> GetAllLitterAsync()
+        public async Task DeleteLitterAsync(Guid LitterId)
         {
-            throw new NotImplementedException();
+            var sql = @"
+                    DELETE FROM [dbo].[Litter]
+                    WHERE Id = @LitterId";
+            await _dbConnection.ExecuteAsync(sql, new { LitterId });
         }
 
-        public Task<Litter> GetByLitterIdAsync(Guid LitterId)
+        public async Task<IEnumerable<Litter>> GetAllLitterAsync()
         {
-            throw new NotImplementedException(); 
+            var sql = @"
+                    SELECT Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime
+                    FROM [dbo].[Litter]";
+            return await _dbConnection.QueryAsync<Litter>(sql);
         }
 
-        public Task UpdateLitterAsync(Litter litter)
+        public async Task<Litter?> GetByLitterIdAsync(Guid LitterId)
         {
-            throw new NotImplementedException();
+            var sql = @"
+                    SELECT Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime
+                    FROM [dbo].[Litter]
+                    WHERE Id = @LitterId";
+            return await _dbConnection.QuerySingleOrDefaultAsync<Litter>(sql, new { LitterId });
+        }
+
+        public async Task UpdateLitterAsync(Litter litter)
+        {
+            var sql = @"
+                    UPDATE [dbo].[Litter]
+                    SET Classification = @Classification, Confidence = @Confidence, LocationLatitude = @LocationLatitude, LocationLongitude = @LocationLongitude, DetectionTime = @DetectionTime
+                    WHERE Id = @Id";
+            await _dbConnection.ExecuteAsync(sql, litter);
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
-using trashtracker_api.Repositories;
 
 namespace trashtracker_api.Controllers
 {
@@ -9,77 +7,52 @@ namespace trashtracker_api.Controllers
     [Route("api/[controller]")]
     public class LitterFromSensoringController : ControllerBase
     {
-        private ILitterRepository _litterRepository;
+        // GET / READ
 
-        public LitterFromSensoringController(ILitterRepository litterRepository)
+        [HttpGet("GetAllLitterFromSensoring")]
+        //[Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<Litter>>> GetAllLitterDataFromSensoring()
         {
-            _litterRepository = litterRepository;
-
+            var litter = await PerformAPICall(true);
+            if (litter != null)
+            {
+                return NotFound();
+            }
+            return Ok(litter);
         }
 
-        public async Task<ActionResult<List<Litter>>> PerformAPICall(int id)
+        [HttpGet("GetLitterFromSensoring")]
+        //[Authorize]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<Litter>>> GetLitterDataFromSensoring(string beginDate, string EndDate)
+        {
+            var litter = await PerformAPICall(false);
+            if (litter != null)
+            {
+                return NotFound();
+            }
+            return Ok(litter);
+        }
+
+        // FUNCTIONS
+        private async Task<ActionResult<List<Litter>>> PerformAPICall(bool getAllData)
         {
             var client = new HttpClient();
             string url;
-            if (id == 0)
-            {
-                url = $"https://avansict2221075.azurewebsites.net/litter/today";
-                var response = await client.GetAsync(url);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var litter = await response.Content.ReadFromJsonAsync<List<Litter>>();
-                    return litter;
-                }
-                else
-                {
-                    Console.WriteLine("Error: " + response.StatusCode);
-                    return StatusCode((int)response.StatusCode, "API call failed");
-                }
-            }
-            else if (id == 1)
-            {
-                url = $"https://avansict2221075.azurewebsites.net/litter";
-                var response = await client.GetAsync(url);
+            url = $"https://avansict2221075.azurewebsites.net/litter/{(getAllData ? "litter" : "today")}";
+            var response = await client.GetAsync(url);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var litter = await response.Content.ReadFromJsonAsync<List<Litter>>();
-                    return litter;
-                }
-                else
-                {
-                    Console.WriteLine("Error: " + response.StatusCode);
-                    return StatusCode((int)response.StatusCode, "API call failed");
-                }
-            }
-            else
+            if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("No Valid URL");
-                return NotFound();
+                return await response.Content.ReadFromJsonAsync<List<Litter>>();
             }
-
-            
-        }
-        [HttpGet("GetAllLitterFromSensoring")]
-        public async Task<ActionResult<List<Litter>>> GetAllLitterDataFromSensoring()
-        {
-            var litter = await PerformAPICall(1);
-            if (litter != null)
-            {
-                return NotFound();
-            }
-            return Ok(litter);
-        }
-        [HttpGet("GetLitterFromSensoring")]
-        public async Task<ActionResult<List<Litter>>> GetLitterDataFromSensoring(string beginDate, string EndDate)
-        {
-            var litter = await PerformAPICall(1);
-            if (litter != null)
-            {
-                return NotFound();
-            }
-            return Ok(litter);
+    
+            Console.WriteLine("Error: " + response.StatusCode);
+            return StatusCode((int)response.StatusCode, "API call failed");
         }
     }
 }
