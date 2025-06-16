@@ -9,7 +9,7 @@ namespace trashtracker_api.Controllers
     public class LitterController : ControllerBase
     {
         private ILitterRepository _litterRepository;
-        
+
 
         public LitterController(ILitterRepository litterRepository)
         {
@@ -17,5 +17,26 @@ namespace trashtracker_api.Controllers
 
         }
         
+        [HttpGet("{identityUserId:guid}", Name = "GetByLitterId")]
+        public async Task<ActionResult<Litter>> GetByLitterId([FromBody] Guid LitterId)
+        {
+            var litter = await _litterRepository.GetByLitterIdAsync(LitterId);
+            
+            if (litter == null)
+                return NotFound();
+            
+            return Ok(litter);
+        }
+
+        [HttpGet(Name = "GetAllLitter")]
+        public async Task<ActionResult<Litter>> GetAllLitter()
+    
+        {
+            var enviroment = await _litterRepository.GetAllLitterAsync();
+            if (enviroment == null)
+                return NotFound();
+
+            return Ok(enviroment);
+        }
     }
 }

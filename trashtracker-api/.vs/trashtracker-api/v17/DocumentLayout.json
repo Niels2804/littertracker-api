@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\repositories\\litterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:repositories\\litterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\repositories\\favoritelocationsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:repositories\\favoritelocationsrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\repositories\\ilitterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:repositories\\ilitterrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,12 +42,38 @@
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 256,
+      "VerticalTabListWidth": 193,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
           "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FavoriteLocationsRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\FavoriteLocationsRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\FavoriteLocationsRepository.cs",
+              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\FavoriteLocationsRepository.cs",
+              "RelativeToolTip": "Repositories\\FavoriteLocationsRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T10:41:56.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ILitterRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\ILitterRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ILitterRepository.cs",
+              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\ILitterRepository.cs",
+              "RelativeToolTip": "Repositories\\ILitterRepository.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAEwAkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T10:14:50.539Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
@@ -46,20 +84,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "LitterRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\LitterRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\LitterRepository.cs",
+              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Repositories\\LitterRepository.cs",
+              "RelativeToolTip": "Repositories\\LitterRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T10:15:27.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "FavoriteLocationsController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\FavoriteLocationsController.cs",
               "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
               "RelativeToolTip": "Controllers\\FavoriteLocationsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T09:02:16.036Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "LitterFromSensoringController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterFromSensoringController.cs",
               "RelativeDocumentMoniker": "Controllers\\LitterFromSensoringController.cs",
@@ -72,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ExternalController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\ExternalController.cs",
               "RelativeDocumentMoniker": "Controllers\\ExternalController.cs",
@@ -85,39 +136,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "SignInController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
               "RelativeDocumentMoniker": "Controllers\\SignInController.cs",
               "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
               "RelativeToolTip": "Controllers\\SignInController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T08:57:01.215Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAkwFMAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAA1wB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T08:23:09.628Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "LitterController.cs",
               "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
               "RelativeDocumentMoniker": "Controllers\\LitterController.cs",
               "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
               "RelativeToolTip": "Controllers\\LitterController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBIAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-15T14:23:22.212Z",
               "EditorCaption": ""
