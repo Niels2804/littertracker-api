@@ -23,12 +23,12 @@ if (string.IsNullOrWhiteSpace(sqlConnectionString))
 }
 
 // Identity API with Dapper Stores
-builder.Services
-    .AddIdentityApiEndpoints<IdentityUser>()
-    .AddDapperStores(options =>
-    {
-        options.ConnectionString = sqlConnectionString;
-    });
+//builder.Services
+//    .AddIdentityApiEndpoints<IdentityUser>()
+//    .AddDapperStores(options =>
+//    {
+//        options.ConnectionString = sqlConnectionString;
+//    });
 
 // Controllers
 builder.Services.AddControllers();
@@ -51,24 +51,21 @@ builder.Services.AddScoped<IFavoriteLocationsRepository, FavoriteLocationsReposi
 
 var app = builder.Build();
 
-app.Run(context => { context.Response.Redirect("swagger"); return Task.CompletedTask; });
-
 // Map default Identity endpoints under /auth.
-app.MapGroup("/auth")
-    .MapIdentityApi<IdentityUser>();
+//app.MapGroup("/auth").MapIdentityApi<IdentityUser>();
 
 app.MapGet("/", () => $"The API is up. Connection string found: {(sqlConnectionStringFound ? "Yes" : "No")}");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

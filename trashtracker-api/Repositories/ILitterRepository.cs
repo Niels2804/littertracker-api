@@ -1,5 +1,4 @@
 ﻿using trashtracker_api.Models;
-using trashtracker_api.Models.Dto;
 
 namespace trashtracker_api.Repositories
 {

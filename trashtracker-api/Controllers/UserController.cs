@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
 using trashtracker_api.Repositories;
-using Microsoft.AspNetCore.Mvc.Controllers;
-
 
 namespace trashtracker_api.Controllers
 {

@@ -2,7 +2,7 @@
 {
     public class Holiday
     {
-        public DateTime HolidayDate { get; set; }
-        public string HolidayName { get; set; }
+        public string Date { get; set; }
+        public string LocalName { get; set; }
     }
 }

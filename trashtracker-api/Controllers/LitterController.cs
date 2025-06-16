@@ -10,7 +10,6 @@ namespace trashtracker_api.Controllers
     {
         private ILitterRepository _litterRepository;
 
-
         public LitterController(ILitterRepository litterRepository)
         {
             _litterRepository = litterRepository;
@@ -28,7 +27,7 @@ namespace trashtracker_api.Controllers
             return Ok(litter);
         }
 
-        [HttpGet(Name = "GetAllLitter")]
+        [HttpGet("GetAllLitter")]
         public async Task<ActionResult<Litter>> GetAllLitter()
     
         {

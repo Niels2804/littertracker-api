@@ -3,6 +3,8 @@ using trashtracker_api.Repositories;
 
 namespace trashtracker_api.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class FavoriteLocationsController : ControllerBase
     {
         private IFavoriteLocationsRepository _favoriteLocationsRepository;

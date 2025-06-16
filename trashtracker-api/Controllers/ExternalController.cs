@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using trashtracker_api.Models;
 
 namespace trashtracker_api.Controllers
@@ -11,35 +10,37 @@ namespace trashtracker_api.Controllers
         // GET
 
         // Getting prediction data
-        [HttpGet(Name = "GetPredictionforDate")]
+        [HttpGet("predictionForDate")]
         public async Task<ActionResult<Prediction>> GetPredictionForDate([FromQuery] DateOnly StartDate, [FromQuery] DateOnly EndDate)
         {
             // TO DO: Schrijf iets om predictions te maken
             return null;
         }
 
-        //Getting Holdiay Data
+        // Getting Holiday Data
 
-        [HttpGet(Name = "GetHolidays")]
-        public async Task GetHolidays([FromBody] int year) // Task<ActionResult<HolidayList>>
+        [HttpGet("holidays")]
+        public async Task<ActionResult<List<Holiday>>> GetHolidays([FromQuery] int year = 0)
         {
+            if (year == 0)
+            {
+                year = DateTime.Now.Year;
+            }
+
             var client = new HttpClient();
-            
             string url = $"https://date.nager.at/api/v3/PublicHolidays/{year}/NL";
-            client.BaseAddress = new Uri(url);
 
-            var json = JsonSerializer.Serialize(new { year });
-            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-            var response = client.PostAsync("posts", content).Result;
+            var response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
-                var responseContent = response.Content.ReadAsStringAsync().Result;   
-                Console.WriteLine(responseContent);
-            } else
+                var holidays = await response.Content.ReadFromJsonAsync<List<Holiday>>();
+                return holidays;
+            }
+            else
             {
                 Console.WriteLine("Error: " + response.StatusCode);
+                return StatusCode((int)response.StatusCode, "API call failed");
             }
         }
     }
