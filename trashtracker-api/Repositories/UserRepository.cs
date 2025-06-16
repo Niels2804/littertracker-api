@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using System.Data;
 using trashtracker_api.Models;
-using trashtracker_api.Models.Dto;
 
 namespace trashtracker_api.Repositories
 {
@@ -15,24 +14,35 @@ namespace trashtracker_api.Repositories
         public async Task CreateUserAsync(User user)
         {
             var sql = @"
-            INSERT INTO [dbo].[Users] (ID, IdentityUserId, DisplayName, ProfilePhotoPath)
-            VALUES (@ID, @IdentityUserId, @DisplayName, @ProfilePhotoPath)";
+            INSERT INTO [dbo].[Users] (Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role)
+            VALUES (@ID, @IdentityUserId, @Email, @Password, @Username, @FirstName, @LastName, @Role)";
             await _dbConnection.ExecuteAsync(sql, user);
         }
 
-        public Task DeleteUserAsync(Guid userId)
+        public async Task DeleteUserAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            var sql = @$"
+            DELETE FROM [dbo].[Users] WHERE IdentityUserId = @IdentityUserId";
+            await _dbConnection.ExecuteAsync(sql, new { IdenityUserId = userId});
         }
 
-        public Task<UserDto> GetUserByUserIDAsync(Guid identityUserId)
+        public async Task<User> GetUserByUserIDAsync(Guid identityUserId)
         {
-            throw new NotImplementedException();
+            var sql = @"
+            SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
+            FROM [dbo].[Users] 
+            WHERE IdentityUserId = @IdentityUserId";
+            var user = await _dbConnection.QuerySingleOrDefault(sql, new {IdentityUserId = identityUserId });
+            return user;
         }
 
-        public Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            var sql = @$"
+            UPDATE [dbo].[Users] 
+            SET Id = @Id, IdentityUserId = @IdentityUserId, Email = @Email, Password = @Password, Username = @Username, FirstName = @FirstName, LastName = @LastName, Role = @Role
+            WHERE IdentityUserId = @IdentityUserId";
+            await _dbConnection.ExecuteAsync(sql, user);
         }
     }
 }
