@@ -1,31 +1,47 @@
-﻿using trashtracker_api.Models;
-using trashtracker_api.Models.Dto;
+﻿using Dapper;
+using System.Data;
+using trashtracker_api.Models;
 
 namespace trashtracker_api.Repositories
 {
     public class FavoriteLocationsRepository : IFavoriteLocationsRepository
     {
-        public Task CreateUserAsync(FavoriteLocation favoriteLocation)
+        private readonly IDbConnection _dbConnection;
+        public FavoriteLocationsRepository(IDbConnection dbConnection)
         {
-            throw new NotImplementedException();
+            _dbConnection = dbConnection;
         }
 
-        public Task DeleteUserAsync(Guid LocationId)
+        public async Task CreateUserAsync(FavoriteLocation favoriteLocation)
         {
-            throw new NotImplementedException();
+            var sql = @"
+            INSERT INTO [dbo].[FavoriteLocations] (Id, UserId, LitterId)
+            VALUES (@Id, @UserId, @LitterId)";
+            await _dbConnection.ExecuteAsync(sql, favoriteLocation);
         }
 
-        public Task GetAllFavoriteLocationsAsync()
+        public async Task DeleteUserAsync(Guid LocationId)
         {
-            throw new NotImplementedException();
+            var sql = @"
+            DELETE FROM [dbo].[FavoriteLocations] WHERE Id = @Id";
+            await _dbConnection.ExecuteAsync(sql);
         }
 
-        public Task<UserDto> GetUserFavoriteLocationIdAsync(Guid locationId)
+        public async Task<IEnumerable<FavoriteLocation>> GetAllFavoriteLocationsAsync()
         {
-            throw new NotImplementedException();
+            var sql = @"
+            SELECT Id, UserId, LitterId FROM [dbo].[FavoriteLocations]";
+            await _dbConnection.ExecuteAsync(sql);
         }
 
-        public Task UpdateUserAsync(FavoriteLocation favoriteLocation)
+        public async Task<FavoriteLocation> GetUserFavoriteLocationIdAsync(Guid locationId)
+        {
+            var sql = @"
+            SELECT Id, UserId, LitterId FROM [dbo].[FavoriteLocations] WHERE Id = @Id";
+            await _dbConnection.ExecuteAsync(sql, locationId);
+        }
+
+        public async Task UpdateUserAsync(FavoriteLocation favoriteLocation)
         {
             throw new NotImplementedException();
         }
