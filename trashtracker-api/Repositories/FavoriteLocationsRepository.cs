@@ -1,30 +1,31 @@
 ﻿using trashtracker_api.Models;
+using trashtracker_api.Models.Dto;
 
 namespace trashtracker_api.Repositories
 {
-    public class FavoriteLocationsRepository : ILitterRepository
+    public class FavoriteLocationsRepository : IFavoriteLocationsRepository
     {
-        public Task CreateLitterAsync(Litter litter)
+        public Task CreateUserAsync(FavoriteLocation favoriteLocation)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteLitterAsync(Guid LitterId)
+        public Task DeleteUserAsync(Guid LocationId)
         {
             throw new NotImplementedException();
         }
 
-        public Task GetAllLitterAsync()
+        public Task GetAllFavoriteLocationsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task GetByLitterIdAsync(Guid LitterId)
+        public Task<UserDto> GetUserFavoriteLocationIdAsync(Guid locationId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateLitterAsync(Litter litter)
+        public Task UpdateUserAsync(FavoriteLocation favoriteLocation)
         {
             throw new NotImplementedException();
         }

@@ -1,30 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\",
+  "WorkspaceRootPath": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\externalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\signincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\mikev\\documents\\informatica\\jaar 1\\periode 4\\lu1 slimme zwerfafvalherkening\\project\\litterapi\\trashtracker-api\\trashtracker-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\litterfromsensoringcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\littercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:controllers\\favoritelocationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|c:\\users\\niels\\documents\\github\\school\\trashtracker-api\\trashtracker-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0AFADB64-67C6-4D93-8756-EC932CC231D2}|trashtracker-api.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,80 +50,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FavoriteLocationsController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FavoriteLocationsController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
-              "RelativeToolTip": "Controllers\\FavoriteLocationsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABKAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T09:02:16.036Z",
+              "WhenOpened": "2025-06-16T11:00:38.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SignInController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SignInController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
+              "RelativeToolTip": "Controllers\\SignInController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T11:00:37.965Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "LitterFromSensoringController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterFromSensoringController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\LitterFromSensoringController.cs",
               "RelativeDocumentMoniker": "Controllers\\LitterFromSensoringController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterFromSensoringController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\LitterFromSensoringController.cs",
               "RelativeToolTip": "Controllers\\LitterFromSensoringController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T08:58:18.887Z",
+              "WhenOpened": "2025-06-16T11:00:36.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LitterController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LitterController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
+              "RelativeToolTip": "Controllers\\LitterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T11:00:26.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FavoriteLocationsController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FavoriteLocationsController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\FavoriteLocationsController.cs",
+              "RelativeToolTip": "Controllers\\FavoriteLocationsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T11:00:24.517Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T10:22:45.679Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ExternalController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\ExternalController.cs",
+              "DocumentMoniker": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\ExternalController.cs",
               "RelativeDocumentMoniker": "Controllers\\ExternalController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\ExternalController.cs",
+              "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\trashtracker-api\\trashtracker-api\\Controllers\\ExternalController.cs",
               "RelativeToolTip": "Controllers\\ExternalController.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwC4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-16T08:57:15.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SignInController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SignInController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\SignInController.cs",
-              "RelativeToolTip": "Controllers\\SignInController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T08:57:01.215Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAkwFMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T08:23:09.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LitterController.cs",
-              "DocumentMoniker": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LitterController.cs",
-              "ToolTip": "C:\\Users\\mikeV\\Documents\\informatica\\Jaar 1\\periode 4\\LU1 Slimme Zwerfafvalherkening\\Project\\LitterAPI\\trashtracker-api\\trashtracker-api\\Controllers\\LitterController.cs",
-              "RelativeToolTip": "Controllers\\LitterController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBIAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T14:23:22.212Z",
               "EditorCaption": ""
             }
           ]

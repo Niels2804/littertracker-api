@@ -1,11 +1,5 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.Text;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using trashtracker_api.Models;
 
 namespace trashtracker_api.Controllers
@@ -14,8 +8,6 @@ namespace trashtracker_api.Controllers
     [Route("api/[controller]")]
     public class ExternalController : ControllerBase
     {
-        static HttpClient client = new HttpClient();
-
         // GET
 
         // Getting prediction data
@@ -27,20 +19,28 @@ namespace trashtracker_api.Controllers
         }
 
         //Getting Holdiay Data
-        [HttpGet(Name = "GetPredictionforDate")]
-        public async Task<ActionResult<HolidayList>> GetPredictionForDate([FromBody] int Year)
+
+        [HttpGet(Name = "GetHolidays")]
+        public async Task GetHolidays([FromBody] int year) // Task<ActionResult<HolidayList>>
         {
-            string url = $"https://date.nager.at/api/v3/PublicHolidays/{Year}/NL";
+            var client = new HttpClient();
+            
+            string url = $"https://date.nager.at/api/v3/PublicHolidays/{year}/NL";
+            client.BaseAddress = new Uri(url);
 
-            HttpResponseMessage response = await client.GetAsync(url);
+            var json = JsonSerializer.Serialize(new { year });
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-            if (!response.IsSuccessStatusCode)
+            var response = client.PostAsync("posts", content).Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                return StatusCode((int)response.StatusCode, "Fout bij ophalen van feestdagen");
+                var responseContent = response.Content.ReadAsStringAsync().Result;   
+                Console.WriteLine(responseContent);
+            } else
+            {
+                Console.WriteLine("Error: " + response.StatusCode);
             }
-
-            var holidays = await response.Content.ReadAsAsync<List<Holiday>>();
-            return holidays;
         }
     }
 }
