@@ -1,14 +1,14 @@
 ﻿using trashtracker_api.Models;
-using trashtracker_api.Models.Dto;
 
 namespace trashtracker_api.Repositories
 {
     public interface IFavoriteLocationsRepository
     {
-        public Task<IEnumerable<FavoriteLocation>> GetAllFavoriteLocationsAsync();
-        public Task<FavoriteLocation> GetUserFavoriteLocationIdAsync(Guid locationId);
-        public Task CreateUserAsync(FavoriteLocation favoriteLocation);
-        public Task UpdateUserAsync(FavoriteLocation favoriteLocation);
-        public Task DeleteUserAsync(Guid LocationId);
+        public Task<FavoriteLocation> GetFavoriteLocationsAsync(Guid favoriteLocationId);
+        public Task<FavoriteLocation> GetFavoriteLocationsAsync(Guid userId, Guid litterId);
+        public Task<IEnumerable<FavoriteLocation>> GetAllFavoriteLocationsAsync(Guid userId);
+        public Task<FavoriteLocation> CreateFavoriteLocationAsync(FavoriteLocation favoriteLocation);
+        public Task UpdateFavoriteLocationAsync(Guid favoriteLocationId, FavoriteLocation favoriteLocation);
+        public Task DeleteAllFavoriteLocationsAsync(Guid userId);
     }
 }
