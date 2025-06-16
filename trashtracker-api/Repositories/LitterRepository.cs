@@ -14,14 +14,14 @@ namespace trashtracker_api.Repositories
             throw new NotImplementedException();
         }
 
-        public Task GetAllLitterAsync()
+        public Task<Litter> GetAllLitterAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task GetByLitterIdAsync(Guid LitterId)
+        public Task<Litter> GetByLitterIdAsync(Guid LitterId)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); 
         }
 
         public Task UpdateLitterAsync(Litter litter)
