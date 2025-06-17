@@ -11,6 +11,6 @@ namespace trashtracker_api.Models
         public float LocationLongitude { get; set; }
         public float LocationLatitude { get; set; }
         public DateTime DetectionTime { get; set; }
-        public required WeatherInfo WeatherInfo { get; set; }
+        public WeatherInfo? WeatherInfo { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using trashtracker_api.Configurations;
 using trashtracker_api.Models;
 
@@ -15,7 +16,14 @@ namespace trashtracker_api.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new LitterConfiguration());
-            //builder.ApplyConfiguration(new WeatherInfoConfiguration());
+            builder.ApplyConfiguration(new WeatherInfoConfiguration());
+            builder.Entity<Litter>()
+            .HasOne(l => l.WeatherInfo)
+            .WithOne(w => w.Litter)
+            .HasForeignKey<Litter>(l => l.Id);
+            builder.Entity<Litter>()
+            .Navigation(l => l.WeatherInfo)
+            .IsRequired();
         }
     }
 }
