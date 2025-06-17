@@ -17,7 +17,7 @@ namespace trashtracker_api.Controllers
 
         // Getting prediction data
         [HttpGet("predict")]
-        [AllowAnonymous]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Prediction>>> GetPredictionForDate([FromQuery] DateOnly startDate, [FromQuery] DateOnly endDate)

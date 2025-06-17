@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
 
 namespace trashtracker_api.Controllers
@@ -10,7 +11,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
 
         [HttpGet("GetAllLitterFromSensoring")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Litter>>> GetAllLitterDataFromSensoring()
@@ -24,7 +25,7 @@ namespace trashtracker_api.Controllers
         }
 
         [HttpGet("GetLitterFromSensoring")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Litter>>> GetLitterDataFromSensoring(string beginDate, string EndDate)

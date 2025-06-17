@@ -19,7 +19,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
         
         [HttpGet("{litterId:guid}", Name = "GetByLitterId")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Litter>> GetByLitterId([FromRoute] Guid litterId)
@@ -33,7 +33,7 @@ namespace trashtracker_api.Controllers
         }
 
         [HttpGet("GetAllLitter")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Litter>> GetAllLitter()

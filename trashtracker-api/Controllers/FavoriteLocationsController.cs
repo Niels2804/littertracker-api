@@ -19,7 +19,7 @@ namespace trashtracker_api.Controllers
         // POST / CREATE
 
         [HttpPost(Name = "CreateFavoriteLocation")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -59,7 +59,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
 
         [HttpGet("{identityUserId:guid}", Name = "GetFavoriteLocationsByUserId")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -83,7 +83,7 @@ namespace trashtracker_api.Controllers
         // UPDATE
 
         [HttpPut("{favoriteLocationId:guid}", Name = "UpdateFavoriteLocationsById")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -114,7 +114,7 @@ namespace trashtracker_api.Controllers
         // DELETE
 
         [HttpDelete("{userId:guid}", Name = "DeleteAllFavoriteLocation")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

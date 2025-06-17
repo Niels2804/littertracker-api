@@ -22,7 +22,7 @@ namespace trashtracker_api.Controllers
         // Creating a new user (.../signin)
 
         [HttpPost("CreateUser")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateUser(User user)
@@ -74,7 +74,7 @@ namespace trashtracker_api.Controllers
         // API to get all existing users (.../user)
 
         [HttpGet("{identityUserId:guid}", Name = "GetUserById")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<User>> GetUserById(Guid identityUserId)
@@ -93,7 +93,7 @@ namespace trashtracker_api.Controllers
         // API to get an specific user by username (.../user/{username})
 
         [HttpGet("{username}", Name = "ReadUserByUsername")]
-        [AllowAnonymous]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -145,7 +145,7 @@ namespace trashtracker_api.Controllers
         // Updating the user by username (.../user/{username})
 
         [HttpPut("UpdateUser")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -175,7 +175,7 @@ namespace trashtracker_api.Controllers
         // Delete user by authentication ID (.../user/{authenticationId})
 
         [HttpDelete("{authenticationId}", Name = "DeleteUserByUsername")]
-        //[Authorize]
+        [AllowAnonymous] // must be Authorized for production
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
