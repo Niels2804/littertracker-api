@@ -1,1 +1,1 @@
-# trashtracker-api
+# LitterTracker-API
