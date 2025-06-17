@@ -27,8 +27,8 @@ namespace trashtracker_api.Controllers
         {
             // Validate the favorite location data
             if (favoriteLocation == null ||
-                favoriteLocation.UserId == Guid.Empty ||
-                favoriteLocation.LitterId == Guid.Empty ||
+                favoriteLocation.UserId == string.Empty ||
+                favoriteLocation.LitterId == string.Empty ||
                 favoriteLocation.Rating < 0)
             {
                 return BadRequest("Invalid favorite location data");

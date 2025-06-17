@@ -1,10 +1,13 @@
-﻿namespace trashtracker_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace trashtracker_api.Models
 {
     public class WeatherInfo
     {
-        public Guid Id { get; set; }
+        [Key]
+        public required string Id { get; set; }
         public float TemperatureCelsius { get; set; }
         public float Humidity { get; set; }
-        public string Conditions { get; set; }
+        public string? Conditions { get; set; }
     }
 }
