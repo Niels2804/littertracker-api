@@ -4,6 +4,11 @@ using trashtracker_api.Models;
 
 namespace trashtracker_api.Controllers
 {
+    public class PredictionsResponse
+    {
+        public IEnumerable<Prediction> Predictions { get; set; }
+    }
+
     [ApiController]
     [Route("api/[controller]")]
     public class ExternalController : ControllerBase
@@ -11,14 +16,33 @@ namespace trashtracker_api.Controllers
         // GET
 
         // Getting prediction data
-        [HttpGet("predictionForDate")]
-        [Authorize]
+        [HttpGet("predict")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Prediction>> GetPredictionForDate([FromQuery] DateOnly StartDate, [FromQuery] DateOnly EndDate)
+        public async Task<ActionResult<IEnumerable<Prediction>>> GetPredictionForDate([FromQuery] DateOnly startDate, [FromQuery] DateOnly endDate)
         {
-            // TO DO: Schrijf iets om predictions te maken
-            return null;
+            if (startDate > endDate)
+            {
+                return BadRequest("Start date must be earlier than or equal to the end date.");
+            }
+
+            // CHANGE URL WHEN DEPLOYING TO PRODUCTION
+            var client = new HttpClient();
+            string url = $"http://localhost:8000/predict?startDate={startDate:yyyy-MM-dd}&endDate={endDate:yyyy-MM-dd}";
+
+            var response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var wrapper = await response.Content.ReadFromJsonAsync<PredictionsResponse>();
+                return Ok(wrapper.Predictions);
+            }
+            else
+            {
+                Console.WriteLine("Error: " + response.StatusCode);
+                return StatusCode((int)response.StatusCode, "API call failed");
+            }
         }
 
         // Getting Holiday Data
@@ -41,7 +65,7 @@ namespace trashtracker_api.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var holidays = await response.Content.ReadFromJsonAsync<List<Holiday>>();
-                return holidays;
+                return Ok(holidays);
             }
             else
             {
