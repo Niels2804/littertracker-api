@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 using trashtracker_api.Models;
-using trashtracker_api.Models.Dto;
+using trashtracker_api.Repositories.interfaces;
 
 namespace trashtracker_api.Repositories
 {
@@ -12,27 +12,62 @@ namespace trashtracker_api.Repositories
         {
             _dbConnection = dbConnection;
         }
-        public async Task CreateUserAsync(User user)
+
+        public async Task<User> CreateUserAsync(User user)
         {
             var sql = @"
-            INSERT INTO [dbo].[Users] (ID, IdentityUserId, DisplayName, ProfilePhotoPath)
-            VALUES (@ID, @IdentityUserId, @DisplayName, @ProfilePhotoPath)";
+                    INSERT INTO [dbo].[Users] (Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role)
+                    VALUES (@Id, @IdentityUserId, @Email, @Password, @Username, @FirstName, @LastName, @Role)";
+            await _dbConnection.ExecuteAsync(sql, user);
+            return user;
+        }
+
+        public async Task<User> GetUserAsync(Guid identityUserId)
+        {
+            var sql = @"
+                    SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
+                    FROM [dbo].[Users] 
+                    WHERE IdentityUserId = @IdentityUserId";
+            var user = await _dbConnection.QuerySingleOrDefault(sql, new { IdentityUserId = identityUserId });
+            return user;
+        }
+
+        public async Task<User> GetUserAsync(string username)
+        {
+            var sql = @"
+                    SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
+                    FROM [dbo].[Users] 
+                    WHERE Username = @Username";
+            var user = await _dbConnection.QuerySingleOrDefault(sql, new { Username = username });
+            return user;
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            var sql = @$"
+                    UPDATE [dbo].[Users] 
+                    SET Id = @Id, IdentityUserId = @IdentityUserId, Email = @Email, Password = @Password, Username = @Username, FirstName = @FirstName, LastName = @LastName, Role = @Role
+                    WHERE IdentityUserId = @IdentityUserId";
             await _dbConnection.ExecuteAsync(sql, user);
         }
 
-        public Task DeleteUserAsync(Guid userId)
+        // AUTHENTICATION
+
+        public async Task<string?> GetAuthenticationIdByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var sql = @"
+                    SELECT Id AS AuthenticationId 
+                    FROM [auth].[AspNetUsers] 
+                    WHERE Email = @Email";
+            return await _dbConnection.QueryFirstOrDefaultAsync<string>(sql, new { Email = email });
         }
 
-        public Task<UserDto> GetUserByUserIDAsync(Guid identityUserId)
+        public async Task DeleteUserAsync(string authenticationId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateUserAsync(User user)
-        {
-            throw new NotImplementedException();
+            var sql = @"
+                    DELETE FROM [auth].[AspNetUsers] 
+                    WHERE Id = @AuthenticationId";
+            await _dbConnection.ExecuteAsync(sql, new { AuthenticationId = authenticationId });
         }
     }
 }
