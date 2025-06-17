@@ -13,7 +13,7 @@ namespace trashtracker_api.Repositories
             _dbConnection = dbConnection;
         }
 
-        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(Guid favoriteLocationId)
+        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(string favoriteLocationId)
         {
             var sql = @"SELECT Id, UserId, LitterId, Rating
                     FROM [dbo].[FavoriteLocations]
@@ -21,7 +21,7 @@ namespace trashtracker_api.Repositories
             return await _dbConnection.QueryFirstOrDefaultAsync<FavoriteLocation>(sql, new { Id = favoriteLocationId });
         }
 
-        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(Guid userId, Guid litterId)
+        public async Task<FavoriteLocation?> GetFavoriteLocationsAsync(string userId, string litterId)
         {
             var sql = @"SELECT Id, UserId, LitterId, Rating
                     FROM [dbo].[FavoriteLocations]
@@ -32,7 +32,7 @@ namespace trashtracker_api.Repositories
             });
         }
 
-        public async Task<IEnumerable<FavoriteLocation>> GetAllFavoriteLocationsAsync(Guid userId)
+        public async Task<IEnumerable<FavoriteLocation>> GetAllFavoriteLocationsAsync(string userId)
         {
             var sql = @"SELECT Id, UserId, LitterId, Rating
                     FROM [dbo].[FavoriteLocations]
@@ -48,7 +48,7 @@ namespace trashtracker_api.Repositories
             return favoriteLocation;
         }
 
-        public async Task UpdateFavoriteLocationAsync(Guid favoriteLocationId, FavoriteLocation favoriteLocation)
+        public async Task UpdateFavoriteLocationAsync(string favoriteLocationId, FavoriteLocation favoriteLocation)
         {
             var sql = @"UPDATE [dbo].[FavoriteLocations] 
                     SET UserId = @UserId, LitterId = @LitterId, Rating = @Rating
@@ -62,7 +62,7 @@ namespace trashtracker_api.Repositories
             });
         }
 
-        public async Task DeleteAllFavoriteLocationsAsync(Guid userId)
+        public async Task DeleteAllFavoriteLocationsAsync(string userId)
         {
             var sql = @"DELETE FROM [dbo].[FavoriteLocations] 
                     WHERE UserId = @Id";

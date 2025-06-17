@@ -27,8 +27,8 @@ namespace trashtracker_api.Controllers
         {
             // Validate the favorite location data
             if (favoriteLocation == null ||
-                favoriteLocation.UserId == Guid.Empty ||
-                favoriteLocation.LitterId == Guid.Empty ||
+                favoriteLocation.UserId == string.Empty ||
+                favoriteLocation.LitterId == string.Empty ||
                 favoriteLocation.Rating < 0)
             {
                 return BadRequest("Invalid favorite location data");
@@ -44,7 +44,8 @@ namespace trashtracker_api.Controllers
             }
 
             // Create a new favorite location
-            favoriteLocation.Id = Guid.NewGuid();
+            Guid Id = Guid.NewGuid();
+            favoriteLocation.Id = Id.ToString();
             var created = await _favoriteLocationsRepository.CreateFavoriteLocationAsync(favoriteLocation);
             
             if (created == null)
@@ -62,9 +63,9 @@ namespace trashtracker_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<FavoriteLocation>>> GetFavoriteLocationsByUserId([FromRoute] Guid identityUserId)
+        public async Task<ActionResult<IEnumerable<FavoriteLocation>>> GetFavoriteLocationsByUserId([FromRoute] string identityUserId)
         {
-            if (identityUserId == Guid.Empty)
+            if (identityUserId == string.Empty)
             {
                 return BadRequest("User ID is required");
             }
@@ -86,13 +87,13 @@ namespace trashtracker_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> UpdateFavoriteLocationsById([FromRoute] Guid favoriteLocationId, [FromBody] FavoriteLocation updatedFavoriteLocation)
+        public async Task<ActionResult> UpdateFavoriteLocationsById([FromRoute] string favoriteLocationId, [FromBody] FavoriteLocation updatedFavoriteLocation)
         {
-            if (favoriteLocationId == Guid.Empty ||
+            if (favoriteLocationId == string.Empty ||
                 updatedFavoriteLocation == null ||
-                updatedFavoriteLocation.Id == Guid.Empty ||
-                updatedFavoriteLocation.UserId == Guid.Empty ||
-                updatedFavoriteLocation.LitterId == Guid.Empty ||
+                updatedFavoriteLocation.Id == string.Empty ||
+                updatedFavoriteLocation.UserId == string.Empty ||
+                updatedFavoriteLocation.LitterId == string.Empty ||
                 updatedFavoriteLocation.Rating < 0)
             {
                 return BadRequest("Invalid favorite location data");
@@ -117,9 +118,9 @@ namespace trashtracker_api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteAllFavoriteLocation(Guid userId)
+        public async Task<IActionResult> DeleteAllFavoriteLocation(string userId)
         {
-            if (userId == Guid.Empty)
+            if (userId == string.Empty)
             {
                 return BadRequest("user ID is required");
             }

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 using System.Data;
+using trashtracker_api.Data;
 using trashtracker_api.Repositories;
 using trashtracker_api.Repositories.interfaces;
 using trashtracker_api.Repositories.Interfaces;
@@ -71,6 +74,10 @@ builder.Services.AddScoped<IDbConnection>(sp =>
     return new SqlConnection(sqlConnectionString);
 });
 
+// Add services to the container
+builder.Services.AddDbContext<LitterDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
 var app = builder.Build();
 
 app.MapGet("/", () => $"The API is up. Connection string found: {(sqlConnectionStringFound ? "Yes" : "No")}");
@@ -81,6 +88,15 @@ if (app.Environment.IsDevelopment())
     //app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapScalarApiReference();
+}
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();

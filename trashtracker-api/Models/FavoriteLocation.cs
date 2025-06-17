@@ -1,10 +1,13 @@
-﻿namespace trashtracker_api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace trashtracker_api.Models
 {
     public class FavoriteLocation
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public Guid LitterId { get; set; }
+        [Key]
+        public string Id { get; set; }
+        public string UserId { get; set; }
+        public string LitterId { get; set; }
         public int Rating { get; set; }
     }
 }
