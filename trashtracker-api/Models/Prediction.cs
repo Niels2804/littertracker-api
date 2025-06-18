@@ -2,7 +2,8 @@
 {
     public class Prediction
     {
-        public DateOnly Date { get; set; }
-        public int PredictedTotal { get; set; }
+        public DateOnly date { get; set; }
+        public int predictedTotal { get; set; }
+        public float confidence { get; set; }
     }
 }
