@@ -58,8 +58,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAAIkAAAAAAAAAAAAswJYAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T10:49:44.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T10:49:44.35Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "Controllers\\LitterFromSensoringController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAQwCYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T10:49:32.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T10:49:32.2Z"
             },
             {
               "$type": "Document",
@@ -84,8 +82,7 @@
               "RelativeToolTip": "Controllers\\LitterController.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAYwCQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T10:49:01.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T10:49:01.51Z"
             },
             {
               "$type": "Document",
@@ -97,8 +94,7 @@
               "RelativeToolTip": "Controllers\\FavoriteLocationsController.cs",
               "ViewState": "AgIAAHsAAAAAAAAAAAAowIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T10:47:08.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T10:47:08.339Z"
             },
             {
               "$type": "Document",
@@ -110,8 +106,7 @@
               "RelativeToolTip": "Models\\Prediction.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T10:46:49.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T10:46:49.737Z"
             },
             {
               "$type": "Document",
@@ -121,7 +116,7 @@
               "RelativeDocumentMoniker": "Controllers\\ExternalController.cs",
               "ToolTip": "C:\\Users\\niels\\Documents\\GitHub\\school\\littertracker-api\\littertracker-api\\Controllers\\ExternalController.cs",
               "RelativeToolTip": "Controllers\\ExternalController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T11:12:56.285Z",
               "EditorCaption": ""
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T17:05:04.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T17:05:04.486Z"
             }
           ]
         }
