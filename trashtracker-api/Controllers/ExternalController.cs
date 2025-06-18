@@ -13,8 +13,6 @@ namespace trashtracker_api.Controllers
     [Route("api/[controller]")]
     public class ExternalController : ControllerBase
     {
-
-
         // GET
 
         // Getting prediction data
