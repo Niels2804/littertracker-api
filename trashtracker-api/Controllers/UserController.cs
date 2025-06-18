@@ -22,7 +22,7 @@ namespace trashtracker_api.Controllers
         // Creating a new user (.../signin)
 
         [HttpPost("CreateUser")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> CreateUser(User user)
@@ -32,8 +32,16 @@ namespace trashtracker_api.Controllers
                 return BadRequest("User data is required");
             }
 
-            // Hashing password and creating user
-            user.Password = PasswordHelper.HashPassword(user.Password);
+            var existingUser = await _userRepository.GetUserByIdAsync(user.IdentityUserId);
+
+            if (existingUser != null)
+            {
+                return BadRequest("User already exists with this IdentityUserId");
+            }
+
+            user.Id = Guid.NewGuid().ToString(); // Generate a new ID for the user
+            user.Password = PasswordHelper.HashPassword(user.Password); // Hashing password and creating user
+
             var createdUser = await _userRepository.CreateUserAsync(user);
 
             if (createdUser == null)
@@ -73,14 +81,14 @@ namespace trashtracker_api.Controllers
 
         // API to get all existing users (.../user)
 
-        [HttpGet("{identityUserId:guid}", Name = "GetUserById")]
-        //[Authorize]
+        [HttpGet("id/{identityUserId}", Name = "GetUserById")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> GetUserById(Guid identityUserId)
+        public async Task<ActionResult<User>> GetUserById(string identityUserId)
         {
             // Checks or there are any users in the database
-            var user = await _userRepository.GetUserAsync(identityUserId);
+            var user = await _userRepository.GetUserByIdAsync(identityUserId);
 
             if (user == null)
             {
@@ -145,7 +153,7 @@ namespace trashtracker_api.Controllers
         // Updating the user by username (.../user/{username})
 
         [HttpPut("UpdateUser")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -157,7 +165,7 @@ namespace trashtracker_api.Controllers
             }
 
             // Checks or the old / current user exists
-            var existing = await _userRepository.GetUserAsync(updatedUser.IdentityUserId);
+            var existing = await _userRepository.GetUserByIdAsync(updatedUser.IdentityUserId);
 
             if (existing == null)
             {
@@ -175,19 +183,17 @@ namespace trashtracker_api.Controllers
         // Delete user by authentication ID (.../user/{authenticationId})
 
         [HttpDelete("{authenticationId}", Name = "DeleteUserByUsername")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(string authenticationId)
         {
-            if (string.IsNullOrEmpty(authenticationId))
+            var existingUser = await _userRepository.GetUserByIdAsync(authenticationId);
+            if (existingUser == null)
             {
-                return BadRequest("AuthenticationId is required");
+                return NotFound("User not found");
             }
-
-            await _userRepository.DeleteUserAsync(authenticationId);
-
+            await _userRepository.DeleteUserAsync(authenticationId, existingUser.Id);
             return NoContent();
         }
     }
