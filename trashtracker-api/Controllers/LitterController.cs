@@ -22,7 +22,7 @@ namespace trashtracker_api.Controllers
         //[Authorize]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<Litter>> GetByLitterId([FromRoute] Guid litterId)
+        public async Task<ActionResult<Litter>> GetByLitterId([FromRoute] string litterId)
         {
             var litter = await _litterRepository.GetByLitterIdAsync(litterId);
             if (litter == null)

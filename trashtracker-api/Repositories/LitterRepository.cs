@@ -22,7 +22,7 @@ namespace trashtracker_api.Repositories
             return litter;
         }
 
-        public async Task DeleteLitterAsync(Guid LitterId)
+        public async Task DeleteLitterAsync(string LitterId)
         {
             var sql = @"
                     DELETE FROM [dbo].[Litter]
@@ -38,7 +38,7 @@ namespace trashtracker_api.Repositories
             return await _dbConnection.QueryAsync<Litter>(sql);
         }
 
-        public async Task<Litter?> GetByLitterIdAsync(Guid LitterId)
+        public async Task<Litter?> GetByLitterIdAsync(string LitterId)
         {
             var sql = @"
                     SELECT Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime
