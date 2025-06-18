@@ -77,10 +77,10 @@ namespace trashtracker_api.Controllers
         //[Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> GetUserById(Guid identityUserId)
+        public async Task<ActionResult<User>> GetUserById(string identityUserId)
         {
             // Checks or there are any users in the database
-            var user = await _userRepository.GetUserAsync(identityUserId);
+            var user = await _userRepository.GetUserByIdAsync(identityUserId);
 
             if (user == null)
             {

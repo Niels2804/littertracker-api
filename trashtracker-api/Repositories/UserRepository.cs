@@ -22,7 +22,7 @@ namespace trashtracker_api.Repositories
             return user;
         }
 
-        public async Task<User> GetUserAsync(Guid identityUserId)
+        public async Task<User> GetUserByIdAsync(string identityUserId)
         {
             var sql = @"
                     SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
