@@ -11,7 +11,7 @@ namespace trashtracker_api.Controllers
     {
         private IFavoriteLocationsRepository _favoriteLocationsRepository;
 
-        public FavoriteLocationsController (IFavoriteLocationsRepository favoriteLocationsRepository)
+        public FavoriteLocationsController(IFavoriteLocationsRepository favoriteLocationsRepository)
         {
             _favoriteLocationsRepository = favoriteLocationsRepository;
         }
@@ -19,7 +19,7 @@ namespace trashtracker_api.Controllers
         // POST / CREATE
 
         [HttpPost(Name = "CreateFavoriteLocation")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,7 +47,7 @@ namespace trashtracker_api.Controllers
             Guid Id = Guid.NewGuid();
             favoriteLocation.Id = Id.ToString();
             var created = await _favoriteLocationsRepository.CreateFavoriteLocationAsync(favoriteLocation);
-            
+
             if (created == null)
             {
                 return BadRequest("Failed to create a new favorite location");
@@ -58,8 +58,8 @@ namespace trashtracker_api.Controllers
 
         // GET / READ
 
-        [HttpGet("{identityUserId:guid}", Name = "GetFavoriteLocationsByUserId")]
-        //[Authorize]
+        [HttpGet("{identityUserId}", Name = "GetFavoriteLocationsByUserId")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -82,8 +82,8 @@ namespace trashtracker_api.Controllers
 
         // UPDATE
 
-        [HttpPut("{favoriteLocationId:guid}", Name = "UpdateFavoriteLocationsById")]
-        //[Authorize]
+        [HttpPut("{favoriteLocationId}", Name = "UpdateFavoriteLocationsById")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -113,18 +113,17 @@ namespace trashtracker_api.Controllers
 
         // DELETE
 
-        [HttpDelete("{userId:guid}", Name = "DeleteAllFavoriteLocation")]
-        //[Authorize]
+        [HttpDelete("{userId}", Name = "DeleteAllFavoriteLocation")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteAllFavoriteLocation(string userId)
         {
-            if (userId == string.Empty)
+            var existingFavoriteLocations = await _favoriteLocationsRepository.GetAllFavoriteLocationsAsync(userId);
+            if (existingFavoriteLocations == null || !existingFavoriteLocations.Any())
             {
-                return BadRequest("user ID is required");
+                return NotFound("No favorite locations found for the user");
             }
-
             await _favoriteLocationsRepository.DeleteAllFavoriteLocationsAsync(userId);
             return NoContent();
         }

@@ -74,8 +74,8 @@ builder.Services.AddScoped<IDbConnection>(sp =>
     return new SqlConnection(sqlConnectionString);
 });
 
-// Add services to the container
-builder.Services.AddDbContext<LitterDBContext>(options =>
+// Add DbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 var app = builder.Build();

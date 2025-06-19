@@ -58,7 +58,7 @@ namespace trashtracker_api.Repositories
                 favoriteLocation.UserId,
                 favoriteLocation.LitterId,
                 favoriteLocation.Rating,
-                FavoriteLocationId = favoriteLocation 
+                FavoriteLocationId = favoriteLocationId
             });
         }
 

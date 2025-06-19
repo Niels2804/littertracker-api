@@ -8,7 +8,7 @@ namespace trashtracker_api.Repositories.interfaces
         public Task<User> GetUserAsync(string username);
         public Task<User> GetUserByIdAsync(string identityUserId);
         public Task UpdateUserAsync(User user);
-        public Task DeleteUserAsync(string authenticationId);
+        public Task DeleteUserAsync(string authenticationId, string userId);
         public Task<string?> GetAuthenticationIdByEmailAsync(string email); // Needed for authorization
 
     }

@@ -15,45 +15,130 @@ namespace trashtracker_api.Repositories
 
         public async Task<Litter> CreateLitterAsync(Litter litter)
         {
-            var sql = @"
-                    INSERT INTO [dbo].[Litter] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
-                    VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
-            await _dbConnection.ExecuteAsync(sql, litter);
+            // First insert the WeatherInfo (other conflict with FK constraint)
+            var sqlWeatherInfo = @"
+                    INSERT INTO [dbo].[WeatherInfo] (Id, TemperatureCelsius, Humidity, Conditions)
+                    VALUES (@Id, @TemperatureCelsius, @Humidity, @Conditions)";
+            await _dbConnection.ExecuteAsync(sqlWeatherInfo, new
+            {
+                litter.WeatherInfo?.Id,
+                litter.WeatherInfo?.TemperatureCelsius,
+                litter.WeatherInfo?.Humidity,
+                litter.WeatherInfo?.Conditions
+            });
+
+            var sqlLitters = @"
+                     INSERT INTO [dbo].[Litters] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
+                     VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
+            await _dbConnection.ExecuteAsync(sqlLitters, litter);
             return litter;
         }
 
         public async Task DeleteLitterAsync(string LitterId)
         {
-            var sql = @"
-                    DELETE FROM [dbo].[Litter]
+            // WeatherInfo Table
+            var sqlWeatherInfo = @"
+                    DELETE FROM [dbo].[WeatherInfo]
                     WHERE Id = @LitterId";
-            await _dbConnection.ExecuteAsync(sql, new { LitterId });
+            await _dbConnection.ExecuteAsync(sqlWeatherInfo, new { LitterId });
+
+            // Litters Table
+            var sqlLitters = @"
+                    DELETE FROM [dbo].[Litters]
+                    WHERE Id = @LitterId";
+            await _dbConnection.ExecuteAsync(sqlLitters, new { LitterId });
         }
 
         public async Task<IEnumerable<Litter>> GetAllLitterAsync()
         {
             var sql = @"
-                    SELECT Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime
-                    FROM [dbo].[Litter]";
-            return await _dbConnection.QueryAsync<Litter>(sql);
+                    SELECT 
+                        l.Id, l.Classification, l.Confidence, l.LocationLatitude, l.LocationLongitude, l.DetectionTime,
+                        w.Id, w.TemperatureCelsius, w.Humidity, w.Conditions
+                    FROM [dbo].[Litters] l
+                    JOIN [dbo].[WeatherInfo] w ON l.Id = w.Id";
+
+            var result = await _dbConnection.QueryAsync<Litter, WeatherInfo, Litter>(
+                sql,
+                (litter, weather) =>
+                {
+                    litter.WeatherInfo = weather;
+                    return litter;
+                },
+                splitOn: "Id"
+            );
+
+            return result;
         }
 
-        public async Task<Litter?> GetByLitterIdAsync(string LitterId)
+        public Task<IEnumerable<Litter>> GetAllLitterAsync(DateTime beginDate, DateTime endDate)
         {
             var sql = @"
-                    SELECT Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime
-                    FROM [dbo].[Litter]
-                    WHERE Id = @LitterId";
-            return await _dbConnection.QuerySingleOrDefaultAsync<Litter>(sql, new { LitterId });
+                SELECT 
+                    l.Id, l.Classification, l.Confidence, l.LocationLatitude, l.LocationLongitude, l.DetectionTime,
+                    w.Id, w.TemperatureCelsius, w.Humidity, w.Conditions
+                FROM [dbo].[Litters] l
+                JOIN [dbo].[WeatherInfo] w ON l.Id = w.Id
+                WHERE l.DetectionTime >= @BeginDate AND l.DetectionTime < @EndDate";
+
+            // EndDate wordt opgehoogd met 1 dag → we pakken alles tot 23:59:59.9999999 van de vorige dag
+            return _dbConnection.QueryAsync<Litter, WeatherInfo, Litter>(
+                sql,
+                (litter, weather) =>
+                {
+                    litter.WeatherInfo = weather;
+                    return litter;
+                },
+                new { BeginDate = beginDate.Date, EndDate = endDate.Date.AddDays(1) },
+                splitOn: "Id"
+            );
+        }
+
+
+        public async Task<Litter?> GetByLitterIdAsync(string litterId)
+        {
+            var sql = @"
+                    SELECT 
+                        l.Id, l.Classification, l.Confidence, l.LocationLatitude, l.LocationLongitude, l.DetectionTime,
+                        w.Id, w.TemperatureCelsius, w.Humidity, w.Conditions
+                    FROM [dbo].[Litters] l
+                    JOIN [dbo].[WeatherInfo] w ON l.Id = w.Id
+                    WHERE l.Id = @litterId";
+
+            var result = await _dbConnection.QueryAsync<Litter, WeatherInfo, Litter>(
+                sql,
+                (litter, weather) =>
+                {
+                    litter.WeatherInfo = weather;
+                    return litter;
+                },
+                new { litterId },
+                splitOn: "TemperatureCelsius" 
+            );
+
+            return result.FirstOrDefault();
         }
 
         public async Task UpdateLitterAsync(Litter litter)
         {
-            var sql = @"
-                    UPDATE [dbo].[Litter]
+            // First UPDATE the WeatherInfo (other conflict with FK constraint)
+            var sqlWeatherInfo = @"
+                    UPDATE [dbo].[WeatherInfo] 
+                    SET TemperatureCelsius = @TemperatureCelsius, Humidity = @Humidity, Conditions = @Conditions
+                    WHERE Id = @Id"; 
+            await _dbConnection.ExecuteAsync(sqlWeatherInfo, new
+            {
+                litter.WeatherInfo?.Id,
+                litter.WeatherInfo?.TemperatureCelsius,
+                litter.WeatherInfo?.Humidity,
+                litter.WeatherInfo?.Conditions
+            });
+
+            var sqlLitters = @"
+                    UPDATE [dbo].[Litters]
                     SET Classification = @Classification, Confidence = @Confidence, LocationLatitude = @LocationLatitude, LocationLongitude = @LocationLongitude, DetectionTime = @DetectionTime
                     WHERE Id = @Id";
-            await _dbConnection.ExecuteAsync(sql, litter);
+            await _dbConnection.ExecuteAsync(sqlLitters, litter);
         }
     }
 }
