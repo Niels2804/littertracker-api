@@ -65,7 +65,7 @@ namespace trashtracker_api.Controllers
             {
                 var beginStr = Uri.EscapeDataString(beginDate.Value.ToString("yyyy-MM-dd"));
                 var endStr = Uri.EscapeDataString(endDate.Value.ToString("yyyy-MM-dd"));
-                url = $"https://avansict2221075.azurewebsites.net/litter?beginDate={beginStr}&endDate={endStr}";
+                url = $"https://avansict2221075.azurewebsites.net/litter/?beginDate={beginStr}&endDate={endStr}";
             }
             else
             {

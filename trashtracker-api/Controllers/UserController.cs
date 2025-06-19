@@ -17,41 +17,6 @@ namespace trashtracker_api.Controllers
             _userRepository = userRepository;
         }
 
-        // POST
-
-        // Creating a new user (.../signin)
-
-        [HttpPost("CreateUser")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUser(User user)
-        {
-            if (user == null)
-            {
-                return BadRequest("User data is required");
-            }
-
-            var existingUser = await _userRepository.GetUserByIdAsync(user.IdentityUserId);
-
-            if (existingUser != null)
-            {
-                return BadRequest("User already exists with this IdentityUserId");
-            }
-
-            user.Id = Guid.NewGuid().ToString(); // Generate a new ID for the user
-            user.Password = PasswordHelper.HashPassword(user.Password); // Hashing password and creating user
-
-            var createdUser = await _userRepository.CreateUserAsync(user);
-
-            if (createdUser == null)
-            {
-                return BadRequest("Failed to create user.");
-            }
-
-            return CreatedAtRoute("ReadUserByUsername", new { username = user.Username }, createdUser);
-        }
-
         // Verifies or the username and password are valid (.../user/verify)
 
         [HttpPost("VerifyUser")]
@@ -67,7 +32,7 @@ namespace trashtracker_api.Controllers
             }
 
             // Gets user data from database and verifies the password
-            var response = await _userRepository.GetUserAsync(user.Username);
+            var response = await _userRepository.GetUserByIdAsync(user.IdentityUserId);
 
             if (response == null || !PasswordHelper.VerifyHashedPasswordV3(response.Password, user.Password))
             {
@@ -93,31 +58,6 @@ namespace trashtracker_api.Controllers
             if (user == null)
             {
                 return NotFound("No users found");
-            }
-
-            return Ok(user);
-        }
-
-        // API to get an specific user by username (.../user/{username})
-
-        [HttpGet("{username}", Name = "ReadUserByUsername")]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> Get(string username)
-        {
-            if (string.IsNullOrEmpty(username))
-            {
-                return BadRequest("Username is required");
-            }
-
-            // Checks if the user exists
-            var user = await _userRepository.GetUserAsync(username);
-
-            if (user == null)
-            {
-                return NotFound("User not found");
             }
 
             return Ok(user);

@@ -5,7 +5,6 @@ namespace trashtracker_api.Models
     public class User
     {
         public string Id { get; set; }
-        [Required(ErrorMessage = "Missing IdentityUserID")]
         public string IdentityUserId { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
@@ -16,5 +15,6 @@ namespace trashtracker_api.Models
         [StringLength(75)]
         public string? LastName { get; set; }
         public int Role { get; set; }
+        public ICollection<FavoriteLocation>? FavoriteLocations { get; set; }
     }
 }

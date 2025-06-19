@@ -33,6 +33,7 @@ if (string.IsNullOrWhiteSpace(sqlConnectionString))
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILitterRepository, LitterRepository>();
 builder.Services.AddScoped<IFavoriteLocationsRepository, FavoriteLocationsRepository>();
+builder.Services.AddScoped<IHolidayRepository, HolidayRepository>();
 
 // Authorization - Identity API with Dapper Stores
 builder.Services.AddAuthorization();
