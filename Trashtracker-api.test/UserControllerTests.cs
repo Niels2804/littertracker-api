@@ -57,7 +57,7 @@ namespace Trashtracker_api.test
             var hashedPassword = PasswordHelper.HashPassword(plainPassword);
             var user = new User { Username = "test", Password = plainPassword };
 
-            _mockUserRepo.Setup(r => r.GetUserAsync("test"))
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync("test"))
                          .ReturnsAsync(new User { Username = "test", Password = hashedPassword });
 
             // Act
@@ -74,7 +74,7 @@ namespace Trashtracker_api.test
         {
             var user = new User { Username = "test", Password = "wrongpass" };
 
-            _mockUserRepo.Setup(r => r.GetUserAsync("test"))
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync("test"))
                          .ReturnsAsync(new User { Username = "test", Password = PasswordHelper.HashPassword("correctpass") });
 
             var result = await _controller.VerifyUser(user);
@@ -134,7 +134,7 @@ namespace Trashtracker_api.test
                 Username = "test"
             };
 
-            _mockUserRepo.Setup(r => r.GetUserAsync(userId))
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync(userId))
                          .ReturnsAsync(user);
 
             _mockUserRepo.Setup(r => r.UpdateUserAsync(user))

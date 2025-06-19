@@ -32,16 +32,6 @@ namespace trashtracker_api.Repositories
             return user;
         }
 
-        public async Task<User> GetUserAsync(string username)
-        {
-            var sql = @"
-                    SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
-                    FROM [dbo].[Users] 
-                    WHERE Username = @Username";
-            var user = await _dbConnection.QuerySingleOrDefaultAsync<User>(sql, new { Username = username });
-            return user;
-        }
-
         public async Task UpdateUserAsync(User user)
         {
             var sql = @$"

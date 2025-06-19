@@ -15,7 +15,12 @@ namespace trashtracker_api.Repositories
 
         public async Task<Litter> CreateLitterAsync(Litter litter)
         {
-            // First insert the WeatherInfo (other conflict with FK constraint)
+            // First insert the Litter (other conflict with FK constraint)
+            var sqlLitters = @"
+                    INSERT INTO [dbo].[Litters] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
+                    VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
+            await _dbConnection.ExecuteAsync(sqlLitters, litter);
+
             var sqlWeatherInfo = @"
                     INSERT INTO [dbo].[WeatherInfo] (Id, TemperatureCelsius, Humidity, Conditions)
                     VALUES (@Id, @TemperatureCelsius, @Humidity, @Conditions)";
@@ -27,26 +32,16 @@ namespace trashtracker_api.Repositories
                 litter.WeatherInfo?.Conditions
             });
 
-            var sqlLitters = @"
-                     INSERT INTO [dbo].[Litters] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
-                     VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
-            await _dbConnection.ExecuteAsync(sqlLitters, litter);
             return litter;
         }
 
-        public async Task DeleteLitterAsync(string LitterId)
+        public async Task DeleteLitterAsync(string litterId)
         {
-            // WeatherInfo Table
-            var sqlWeatherInfo = @"
-                    DELETE FROM [dbo].[WeatherInfo]
-                    WHERE Id = @LitterId";
-            await _dbConnection.ExecuteAsync(sqlWeatherInfo, new { LitterId });
-
-            // Litters Table
-            var sqlLitters = @"
+            var sql = @"
                     DELETE FROM [dbo].[Litters]
                     WHERE Id = @LitterId";
-            await _dbConnection.ExecuteAsync(sqlLitters, new { LitterId });
+
+            await _dbConnection.ExecuteAsync(sql, new { LitterId = litterId });
         }
 
         public async Task<IEnumerable<Litter>> GetAllLitterAsync()

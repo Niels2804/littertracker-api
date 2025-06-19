@@ -12,7 +12,7 @@ using trashtracker_api.Data;
 namespace trashtracker_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250618220044_Init")]
+    [Migration("20250619095437_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -49,7 +49,7 @@ namespace trashtracker_api.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("AspNetRoles", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -74,7 +74,7 @@ namespace trashtracker_api.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -139,7 +139,7 @@ namespace trashtracker_api.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -164,7 +164,7 @@ namespace trashtracker_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -186,7 +186,7 @@ namespace trashtracker_api.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -201,7 +201,7 @@ namespace trashtracker_api.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -220,7 +220,7 @@ namespace trashtracker_api.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens", "auth");
                 });
 
             modelBuilder.Entity("trashtracker_api.Models.FavoriteLocation", b =>
@@ -237,9 +237,11 @@ namespace trashtracker_api.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("FavoriteLocations");
                 });
@@ -294,7 +296,7 @@ namespace trashtracker_api.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(75)
@@ -311,6 +313,9 @@ namespace trashtracker_api.Migrations
                         .HasColumnType("nvarchar(75)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -395,6 +400,17 @@ namespace trashtracker_api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("trashtracker_api.Models.FavoriteLocation", b =>
+                {
+                    b.HasOne("trashtracker_api.Models.User", "User")
+                        .WithMany("FavoriteLocations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("trashtracker_api.Models.Litter", b =>
                 {
                     b.HasOne("trashtracker_api.Models.WeatherInfo", "WeatherInfo")
@@ -404,6 +420,20 @@ namespace trashtracker_api.Migrations
                         .IsRequired();
 
                     b.Navigation("WeatherInfo");
+                });
+
+            modelBuilder.Entity("trashtracker_api.Models.User", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithOne()
+                        .HasForeignKey("trashtracker_api.Models.User", "IdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("trashtracker_api.Models.User", b =>
+                {
+                    b.Navigation("FavoriteLocations");
                 });
 
             modelBuilder.Entity("trashtracker_api.Models.WeatherInfo", b =>

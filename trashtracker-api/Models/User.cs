@@ -16,5 +16,6 @@ namespace trashtracker_api.Models
         [StringLength(75)]
         public string? LastName { get; set; }
         public int Role { get; set; }
+        public ICollection<FavoriteLocation>? FavoriteLocations { get; set; }
     }
 }

@@ -234,9 +234,11 @@ namespace trashtracker_api.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("FavoriteLocations");
                 });
@@ -291,7 +293,7 @@ namespace trashtracker_api.Migrations
 
                     b.Property<string>("IdentityUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(75)
@@ -308,6 +310,9 @@ namespace trashtracker_api.Migrations
                         .HasColumnType("nvarchar(75)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -392,6 +397,17 @@ namespace trashtracker_api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("trashtracker_api.Models.FavoriteLocation", b =>
+                {
+                    b.HasOne("trashtracker_api.Models.User", "User")
+                        .WithMany("FavoriteLocations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("trashtracker_api.Models.Litter", b =>
                 {
                     b.HasOne("trashtracker_api.Models.WeatherInfo", "WeatherInfo")
@@ -401,6 +417,20 @@ namespace trashtracker_api.Migrations
                         .IsRequired();
 
                     b.Navigation("WeatherInfo");
+                });
+
+            modelBuilder.Entity("trashtracker_api.Models.User", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithOne()
+                        .HasForeignKey("trashtracker_api.Models.User", "IdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("trashtracker_api.Models.User", b =>
+                {
+                    b.Navigation("FavoriteLocations");
                 });
 
             modelBuilder.Entity("trashtracker_api.Models.WeatherInfo", b =>

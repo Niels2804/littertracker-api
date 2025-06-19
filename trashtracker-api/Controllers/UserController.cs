@@ -67,7 +67,7 @@ namespace trashtracker_api.Controllers
             }
 
             // Gets user data from database and verifies the password
-            var response = await _userRepository.GetUserAsync(user.Username);
+            var response = await _userRepository.GetUserByIdAsync(user.IdentityUserId);
 
             if (response == null || !PasswordHelper.VerifyHashedPasswordV3(response.Password, user.Password))
             {
@@ -93,31 +93,6 @@ namespace trashtracker_api.Controllers
             if (user == null)
             {
                 return NotFound("No users found");
-            }
-
-            return Ok(user);
-        }
-
-        // API to get an specific user by username (.../user/{username})
-
-        [HttpGet("{username}", Name = "ReadUserByUsername")]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> Get(string username)
-        {
-            if (string.IsNullOrEmpty(username))
-            {
-                return BadRequest("Username is required");
-            }
-
-            // Checks if the user exists
-            var user = await _userRepository.GetUserAsync(username);
-
-            if (user == null)
-            {
-                return NotFound("User not found");
             }
 
             return Ok(user);
