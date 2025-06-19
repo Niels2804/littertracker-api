@@ -25,29 +25,29 @@ namespace Trashtracker_api.test
             _controller = new UserController(_mockUserRepo.Object);
         }
 
-        [TestMethod]
-        public async Task CreateUser_ValidUser_ReturnsCreated()
-        {
-            // Arrange
-            var user = new User { Username = "test", Password = "password" };
-            _mockUserRepo.Setup(r => r.CreateUserAsync(It.IsAny<User>()))
-                         .ReturnsAsync(user);
+        //[TestMethod]
+        //public async Task CreateUser_ValidUser_ReturnsCreated()
+        //{
+        //    // Arrange
+        //    var user = new User { Username = "test", Password = "password" };
+        //    _mockUserRepo.Setup(r => r.CreateUserAsync(It.IsAny<User>()))
+        //                 .ReturnsAsync(user);
 
-            // Act
-            var result = await _controller.CreateUser(user);
+        //    // Act
+        //    var result = await _controller.CreateUser(user);
 
-            // Assert
-            var createdAt = result as CreatedAtRouteResult;
-            Assert.IsNotNull(createdAt);
-            Assert.AreEqual("ReadUserByUsername", createdAt.RouteName);
-        }
+        //    // Assert
+        //    var createdAt = result as CreatedAtRouteResult;
+        //    Assert.IsNotNull(createdAt);
+        //    Assert.AreEqual("ReadUserByUsername", createdAt.RouteName);
+        //}
 
-        [TestMethod]
-        public async Task CreateUser_NullUser_ReturnsBadRequest()
-        {
-            var result = await _controller.CreateUser(null);
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        }
+        //[TestMethod]
+        //public async Task CreateUser_NullUser_ReturnsBadRequest()
+        //{
+        //    var result = await _controller.CreateUser(null);
+        //    Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+        //}
 
         [TestMethod]
         public async Task VerifyUser_ValidCredentials_ReturnsOk()

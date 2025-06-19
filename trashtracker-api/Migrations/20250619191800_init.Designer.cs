@@ -12,8 +12,8 @@ using trashtracker_api.Data;
 namespace trashtracker_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250619095437_Init")]
-    partial class Init
+    [Migration("20250619191800_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,6 +244,20 @@ namespace trashtracker_api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("FavoriteLocations");
+                });
+
+            modelBuilder.Entity("trashtracker_api.Models.Holiday", b =>
+                {
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LocalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Date");
+
+                    b.ToTable("Holidays");
                 });
 
             modelBuilder.Entity("trashtracker_api.Models.Litter", b =>

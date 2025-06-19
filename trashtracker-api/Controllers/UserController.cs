@@ -17,41 +17,6 @@ namespace trashtracker_api.Controllers
             _userRepository = userRepository;
         }
 
-        // POST
-
-        // Creating a new user (.../signin)
-
-        [HttpPost("CreateUser")]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUser(User user)
-        {
-            if (user == null)
-            {
-                return BadRequest("User data is required");
-            }
-
-            var existingUser = await _userRepository.GetUserByIdAsync(user.IdentityUserId);
-
-            if (existingUser != null)
-            {
-                return BadRequest("User already exists with this IdentityUserId");
-            }
-
-            user.Id = Guid.NewGuid().ToString(); // Generate a new ID for the user
-            user.Password = PasswordHelper.HashPassword(user.Password); // Hashing password and creating user
-
-            var createdUser = await _userRepository.CreateUserAsync(user);
-
-            if (createdUser == null)
-            {
-                return BadRequest("Failed to create user.");
-            }
-
-            return CreatedAtRoute("ReadUserByUsername", new { username = user.Username }, createdUser);
-        }
-
         // Verifies or the username and password are valid (.../user/verify)
 
         [HttpPost("VerifyUser")]

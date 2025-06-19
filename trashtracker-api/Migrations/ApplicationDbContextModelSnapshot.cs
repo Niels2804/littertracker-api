@@ -243,6 +243,20 @@ namespace trashtracker_api.Migrations
                     b.ToTable("FavoriteLocations");
                 });
 
+            modelBuilder.Entity("trashtracker_api.Models.Holiday", b =>
+                {
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LocalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Date");
+
+                    b.ToTable("Holidays");
+                });
+
             modelBuilder.Entity("trashtracker_api.Models.Litter", b =>
                 {
                     b.Property<string>("Id")

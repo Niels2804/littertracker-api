@@ -15,12 +15,6 @@ namespace trashtracker_api.Repositories
 
         public async Task<Litter> CreateLitterAsync(Litter litter)
         {
-            // First insert the Litter (other conflict with FK constraint)
-            var sqlLitters = @"
-                    INSERT INTO [dbo].[Litters] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
-                    VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
-            await _dbConnection.ExecuteAsync(sqlLitters, litter);
-
             var sqlWeatherInfo = @"
                     INSERT INTO [dbo].[WeatherInfo] (Id, TemperatureCelsius, Humidity, Conditions)
                     VALUES (@Id, @TemperatureCelsius, @Humidity, @Conditions)";
@@ -32,17 +26,28 @@ namespace trashtracker_api.Repositories
                 litter.WeatherInfo?.Conditions
             });
 
+            var sqlLitters = @"
+                    INSERT INTO [dbo].[Litters] (Id, Classification, Confidence, LocationLatitude, LocationLongitude, DetectionTime)
+                    VALUES (@Id, @Classification, @Confidence, @LocationLatitude, @LocationLongitude, @DetectionTime)";
+            await _dbConnection.ExecuteAsync(sqlLitters, litter);
+
             return litter;
         }
 
         public async Task DeleteLitterAsync(string litterId)
         {
-            var sql = @"
+            var sqlDeleteWeather = @"
+                    DELETE FROM [dbo].[WeatherInfo]
+                    WHERE Id = @LitterId";
+
+            var sqlDeleteLitter = @"
                     DELETE FROM [dbo].[Litters]
                     WHERE Id = @LitterId";
 
-            await _dbConnection.ExecuteAsync(sql, new { LitterId = litterId });
+            await _dbConnection.ExecuteAsync(sqlDeleteWeather, new { LitterId = litterId });
+            await _dbConnection.ExecuteAsync(sqlDeleteLitter, new { LitterId = litterId });
         }
+
 
         public async Task<IEnumerable<Litter>> GetAllLitterAsync()
         {

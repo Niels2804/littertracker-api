@@ -12,6 +12,7 @@ namespace trashtracker_api.Data
         public DbSet<Litter> Litters { get; set; }
         public DbSet<WeatherInfo> WeatherInfo { get; set; }
         public DbSet<FavoriteLocation> FavoriteLocations { get; set; }
+        public DbSet<Holiday> Holidays { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

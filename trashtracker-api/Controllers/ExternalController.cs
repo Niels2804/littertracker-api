@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using trashtracker_api.Models;
+using trashtracker_api.Repositories.interfaces;
 
 namespace trashtracker_api.Controllers
 {
@@ -13,6 +14,12 @@ namespace trashtracker_api.Controllers
     [Route("api/[controller]")]
     public class ExternalController : ControllerBase
     {
+        private IHolidayRepository _holidayRepository;
+        public ExternalController(IHolidayRepository holidayRepository)
+        {
+            _holidayRepository = holidayRepository;
+        }
+
         // GET
 
         // Getting prediction data
@@ -27,10 +34,8 @@ namespace trashtracker_api.Controllers
                 return BadRequest("Start date must be earlier than or equal to the end date.");
             }
 
-            // CHANGE URL WHEN DEPLOYING TO PRODUCTION
             var client = new HttpClient();
-            string url = $"http://localhost:8000/predict?startDate={startDate:yyyy-MM-dd}&endDate={endDate:yyyy-MM-dd}";
-
+            string url = $"https://litterapi.jarivankaam.nl/predict/?startDate={startDate:yyyy-MM-dd}&endDate={endDate:yyyy-MM-dd}";
             var response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
@@ -52,26 +57,55 @@ namespace trashtracker_api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Holiday>))]
         public async Task<ActionResult<List<Holiday>>> GetHolidays([FromQuery] int year = 0)
         {
-            if (year == 0)
-            {
-                year = DateTime.Now.Year;
-            }
-
             var client = new HttpClient();
-            string url = $"https://date.nager.at/api/v3/PublicHolidays/{year}/NL";
+            List<Holiday> holidays;
 
-            var response = await client.GetAsync(url);
+            try
+            {
+                if (year == 0)
+                {
+                    year = DateTime.Now.Year;
+                }
 
-            if (response.IsSuccessStatusCode)
-            {
-                var holidays = await response.Content.ReadFromJsonAsync<List<Holiday>>();
-                return Ok(holidays);
+                string url = $"https://date.nager.at/api/v3/PublicHolidays/{year}/NL";
+
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var res = await response.Content.ReadFromJsonAsync<List<Holiday>>();
+
+                    if (res == null || res.Count == 0)
+                    {
+                        var dbData = await _holidayRepository.GetHolidaysByYear(year);
+                        holidays = dbData.ToList();
+                    }
+                    else {
+                        holidays = res;
+                        foreach (var holiday in holidays)
+                        {
+                            var existing = await _holidayRepository.GetHolidayByDateAsync(holiday.Date);
+                            if (existing == null)
+                            {
+                                await _holidayRepository.CreateHolidayAsync(holiday);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    var dbData = await _holidayRepository.GetHolidaysByYear(year);
+                    holidays = dbData.ToList(); 
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Error: " + response.StatusCode);
-                return StatusCode((int)response.StatusCode, "API call failed");
+                Console.WriteLine("API call failed: " + ex.Message);
+                var dbData = await _holidayRepository.GetHolidaysByYear(year);
+                holidays = dbData.ToList();
             }
+
+            return holidays;
         }
     }
 }
