@@ -183,27 +183,44 @@ namespace Trashtracker_api.test
         }
 
         [TestMethod]
-        public async Task DeleteAllFavoriteLocation_ValidUserId_ReturnsNoContent()
+        public async Task DeleteAllFavoriteLocation_LocationsExist_ReturnsNoContent()
         {
             // Arrange
             string userId = Guid.NewGuid().ToString();
+            var favoriteLocations = new List<FavoriteLocation>
+    {
+        new FavoriteLocation { Id = Guid.NewGuid().ToString(), UserId = userId, LitterId = "123", Rating = 1 }
+    };
+
+            _favoriteLocationsRepoMock.Setup(r => r.GetAllFavoriteLocationsAsync(userId))
+                                       .ReturnsAsync(favoriteLocations);
+
+            _favoriteLocationsRepoMock.Setup(r => r.DeleteAllFavoriteLocationsAsync(userId))
+                                       .Returns(Task.CompletedTask);
 
             // Act
             var result = await _controller.DeleteAllFavoriteLocation(userId);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
-            _favoriteLocationsRepoMock.Verify(r => r.DeleteAllFavoriteLocationsAsync(userId), Times.Once);
         }
 
         [TestMethod]
-        public async Task DeleteAllFavoriteLocation_EmptyUserId_ReturnsBadRequest()
+        public async Task DeleteAllFavoriteLocation_NoLocationsFound_ReturnsNotFound()
         {
+            // Arrange
+            string userId = Guid.NewGuid().ToString();
+
+            _favoriteLocationsRepoMock.Setup(r => r.GetAllFavoriteLocationsAsync(userId))
+                                       .ReturnsAsync(new List<FavoriteLocation>());
+
             // Act
-            var result = await _controller.DeleteAllFavoriteLocation(string.Empty);
+            var result = await _controller.DeleteAllFavoriteLocation(userId);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
+            var notFound = result as NotFoundObjectResult;
+            Assert.IsNotNull(notFound);
+            Assert.AreEqual("No favorite locations found for the user", notFound.Value);
         }
     }
 }

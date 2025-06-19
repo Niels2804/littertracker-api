@@ -127,14 +127,13 @@ namespace Trashtracker_api.test
         public async Task UpdateUser_UserExists_ReturnsOk()
         {
             // Arrange
-            var userId = Guid.NewGuid().ToString(); // string ID
             var user = new User
             {
-                IdentityUserId = userId,
+                IdentityUserId = Guid.NewGuid().ToString(),
                 Username = "test"
             };
 
-            _mockUserRepo.Setup(r => r.GetUserByIdAsync(userId))
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync(user.IdentityUserId))
                          .ReturnsAsync(user);
 
             _mockUserRepo.Setup(r => r.UpdateUserAsync(user))
@@ -144,15 +143,31 @@ namespace Trashtracker_api.test
             var result = await _controller.UpdateUser(user);
 
             // Assert
-            var okResult = result as OkObjectResult;
-            Assert.IsNotNull(okResult);
-            Assert.AreEqual(user, okResult.Value);
+            var ok = result as OkObjectResult;
+            Assert.IsNotNull(ok);
+            Assert.AreEqual(user, ok.Value);
         }
-
         [TestMethod]
-        public async Task DeleteUser_ValidId_ReturnsNoContent()
+        public async Task DeleteUser_UserExists_ReturnsNoContent()
         {
-            var result = await _controller.Update("authId");
+            // Arrange
+            var authenticationId = Guid.NewGuid().ToString();
+            var user = new User
+            {
+                IdentityUserId = authenticationId,
+                Id = Guid.NewGuid().ToString()
+            };
+
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync(authenticationId))
+                         .ReturnsAsync(user);
+
+            _mockUserRepo.Setup(r => r.DeleteUserAsync(authenticationId, user.Id))
+                         .Returns(Task.CompletedTask);
+
+            // Act
+            var result = await _controller.Update(authenticationId);
+
+            // Assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
         }
     }

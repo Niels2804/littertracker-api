@@ -122,7 +122,7 @@ namespace trashtracker_api.Controllers
 
         // Delete user by authentication ID (.../user/{authenticationId})
 
-        [HttpDelete("{authenticationId}", Name = "DeleteUserByUsername")]
+        [HttpDelete("{authenticationId}", Name = "DeleteUserById")]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
