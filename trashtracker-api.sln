@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trashtracker-api", "trashtracker-api\trashtracker-api.csproj", "{130751DE-8E71-B4C1-EF22-6CEDF64137BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trashtracker-api.test", "trashtracker-api.test\Trashtracker-api.test.csproj", "{AB9B818F-8F46-1593-3BAA-EBBA25A117D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trashtracker-api.test", "Trashtracker-api.test\Trashtracker-api.test.csproj", "{AB9B818F-8F46-1593-3BAA-EBBA25A117D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
