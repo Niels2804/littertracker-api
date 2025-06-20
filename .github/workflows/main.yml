@@ -1,0 +1,157 @@
+name: Build, Test and Deploy a .NET Core WebApi to Azure App Service
+
+env: # Change these settings when you need to
+  ARTIFACT_NAME: WebApi
+  DOTNET_CORE_VERSION: 8.0.x
+  PUBLISH_DIRECTORY: "./out/publish"
+
+on:
+  push:
+    branches:
+      - main
+      - deployment
+      - master
+  workflow_dispatch: 
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Check if AZURE_WEBAPP_NAME secret exists"
+        env:
+          super_secret: ${{ secrets.AZURE_WEBAPP_NAME }}
+        if: ${{ env.super_secret == '' }}
+        run: |
+          echo "❌ Secret AZURE_WEBAPP_NAME is missing."
+          echo "➡️ Maak hem aan bij Settings > Actions secrets and variables > Actions."
+          exit 1
+
+      - name: "Check if AZURE_WEBAPP_PUBLISH_PASSWORD secret exists"
+        env:
+          super_secret: ${{ secrets.AZURE_WEBAPP_PUBLISH_PASSWORD }}
+        if: ${{ env.super_secret == '' }}
+        run: |
+          echo "❌ Secret AZURE_WEBAPP_PUBLISH_PASSWORD is missing."
+          echo "➡️ Maak hem aan bij Settings > Actions secrets and variables > Actions."
+          exit 1
+
+      - name: "Check if AZURE_WEBAPP_PUBLISH_USERNAME secret exists"
+        env:
+          super_secret: ${{ secrets.AZURE_WEBAPP_PUBLISH_USERNAME }}
+        if: ${{ env.super_secret == '' }}
+        run: |
+          echo "❌ Secret AZURE_WEBAPP_PUBLISH_USERNAME is missing."
+          echo "➡️ Maak hem aan bij Settings > Actions secrets and variables > Actions."
+          exit 1
+
+      - name: "Check if WEBAPI_PROJECT_NAME secret exists"
+        env:
+          super_secret: ${{ secrets.WEBAPI_PROJECT_NAME }}
+        if: ${{ env.super_secret == '' }}
+        run: |
+          echo "❌ Secret WEBAPI_PROJECT_NAME is missing."
+          echo "➡️ Maak hem aan bij Settings > Actions secrets and variables > Actions."
+          exit 1
+
+  build:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish ./${{ secrets.WEBAPI_PROJECT_NAME }} --output ${{ env.PUBLISH_DIRECTORY }} --configuration Release
+
+      - name: Publish Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PUBLISH_DIRECTORY }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [check, build]
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.PUBLISH_DIRECTORY }}
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          publish-profile: |
+            <publishData>
+              <publishProfile profileName="${{ secrets.AZURE_WEBAPP_NAME }} - Zip Deploy"
+                publishMethod="ZipDeploy"
+                publishUrl="${{ secrets.AZURE_WEBAPP_NAME }}.scm.azurewebsites.net:443"
+                userName="${{ secrets.AZURE_WEBAPP_PUBLISH_USERNAME }}"
+                userPWD="${{ secrets.AZURE_WEBAPP_PUBLISH_PASSWORD }}"
+                destinationAppUrl="http://${{ secrets.AZURE_WEBAPP_NAME }}.azurewebsites.net"
+                SQLServerDBConnectionString=""
+                mySQLDBConnectionString=""
+                hostingProviderForumLink=""
+                controlPanelLink="https://portal.azure.com"
+                webSystem="WebSites">
+                <databases />
+              </publishProfile>
+            </publishData>
+          package: '${{ env.PUBLISH_DIRECTORY }}'
+
+  automated-api-tests:
+    runs-on: ubuntu-latest
+    needs: [check, build, deploy]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+
+      - name: Login to Postman CLI
+        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Run API tests
+        run: |
+          attempts=0
+          max_attempts=3
+          success=false
+          failed=false
+
+          while [ $attempts -lt $max_attempts ]; do
+            echo "Attempt $((attempts+1)) of $max_attempts"
+
+            postman collection run 28008990-76415ac0-2fa4-4361-b5e2-b1c2d5d5fa7d -e 28008990-6676e215-bc7f-4320-9bc6-1a698cea2fde -i 28008990-fc5ca702-10b7-472d-9398-8e33c115eca4 -i 28008990-70611f6f-cc3e-4d3c-ab5d-d46f29d6e9e5 -i 28008990-787ed8bb-6413-4d19-b7cf-b6a862aede08 -i 28008990-760fe5aa-f051-4c66-a45d-fb3618c53798 -i 28008990-38e4ad59-8419-49c0-b226-7eac76ac97c4 -i 28008990-942087d0-527c-4783-8982-8ed53bb2a251 -i 28008990-f902bda6-bb83-4a3d-aa68-e41f4039f598 -i 28008990-002c7839-a211-4137-9593-2e6ce3a61d0c -i 28008990-d6ecdc97-c549-4752-8efa-e040ccfa76a4 -i 28008990-fad6f42b-e0b2-43c6-943e-52ed2f8b1cf6 -i 28008990-8e7a8bf1-b2e6-4be5-ae60-0c2869b1ef47 -i 28008990-12c91e0b-b21c-4844-86f4-39c3bf27d399 -i 28008990-fbd70164-ffac-48e6-a26d-44a539b0a2de -i 28008990-76748e04-4b3b-45b4-98be-e891f8dc764c -i 28008990-4c576931-0e60-4a43-a191-a23371c67be7 -i 28008990-e107d157-608f-4260-8870-dcf44c011cba -i 28008990-0d841059-4108-4f8c-b04f-fbeb44cd062f -i 28008990-3aff7833-e995-43d9-85c9-2a43b0df1a00 -i 28008990-a8a39c7c-5e38-4083-830c-fb96f7064543 -i 28008990-0e52c500-3d3c-430d-917a-a633940d9ecc -i 28008990-092fda78-5bca-4420-a401-15006ca1fee3 -i 28008990-2d52fe39-6cc9-4dc2-bbfe-f6ef70ce1db2 -i 28008990-97f40591-6cde-45ba-8d59-49d9e9ac8778
+
+            if [ "$failed" == "true" ]; then
+              echo "Tests failed. Retrying..."
+              attempts=$((attempts + 1))
+              failed=false
+            else
+              success=true
+              break
+            fi
+          done
+
+          if [ "$success" == "false" ]; then
+            echo "API tests failed after $max_attempts attempts."
+            exit 1
+          else
+            echo "API tests passed successfully after $attempts attempts."
+          fi
