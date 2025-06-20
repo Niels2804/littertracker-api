@@ -25,47 +25,35 @@ namespace Trashtracker_api.test
             _controller = new UserController(_mockUserRepo.Object);
         }
 
-        //[TestMethod]
-        //public async Task CreateUser_ValidUser_ReturnsCreated()
-        //{
-        //    // Arrange
-        //    var user = new User { Username = "test", Password = "password" };
-        //    _mockUserRepo.Setup(r => r.CreateUserAsync(It.IsAny<User>()))
-        //                 .ReturnsAsync(user);
-
-        //    // Act
-        //    var result = await _controller.CreateUser(user);
-
-        //    // Assert
-        //    var createdAt = result as CreatedAtRouteResult;
-        //    Assert.IsNotNull(createdAt);
-        //    Assert.AreEqual("ReadUserByUsername", createdAt.RouteName);
-        //}
-
-        //[TestMethod]
-        //public async Task CreateUser_NullUser_ReturnsBadRequest()
-        //{
-        //    var result = await _controller.CreateUser(null);
-        //    Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
-        //}
-
         [TestMethod]
         public async Task VerifyUser_ValidCredentials_ReturnsOk()
         {
             // Arrange
-            var plainPassword = "password";
+            var userId = Guid.NewGuid().ToString();
+            var plainPassword = "Test123!";
             var hashedPassword = PasswordHelper.HashPassword(plainPassword);
-            var user = new User { Username = "test", Password = plainPassword };
 
-            _mockUserRepo.Setup(r => r.GetUserByIdAsync("test"))
-                         .ReturnsAsync(new User { Username = "test", Password = hashedPassword });
+            var inputUser = new User
+            {
+                IdentityUserId = userId,
+                Password = plainPassword
+            };
+
+            var dbUser = new User
+            {
+                IdentityUserId = userId,
+                Password = hashedPassword
+            };
+
+            _mockUserRepo.Setup(r => r.GetUserByIdAsync(userId)).ReturnsAsync(dbUser);
 
             // Act
-            var result = await _controller.VerifyUser(user);
+            var result = await _controller.VerifyUser(inputUser);
 
             // Assert
             var okResult = result.Result as OkObjectResult;
             Assert.IsNotNull(okResult);
+            Assert.AreEqual(200, okResult.StatusCode);
             Assert.AreEqual(true, okResult.Value);
         }
 
