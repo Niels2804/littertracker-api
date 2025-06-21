@@ -26,7 +26,7 @@ internal class Program
         Env.Load();
 
         // Haal SQL connection string uit environment
-        var sqlConnectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
+        var sqlConnectionString = builder.Configuration.GetConnectionString("SQL_CONNECTION_STRING");
         var sqlConnectionStringFound = !string.IsNullOrWhiteSpace(sqlConnectionString);
 
         if (!sqlConnectionStringFound)
