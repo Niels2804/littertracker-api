@@ -88,6 +88,22 @@ namespace trashtracker_api.Controllers
             return Ok(authenticationDto);
         }
 
+        [HttpGet(Name = "GetAllUsers")]
+        [AllowAnonymous] // Must be Authorize later
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+        {
+            var users = await _userRepository.GetUsersAsync();
+
+            if (users == null)
+            {
+                return NotFound("No users found");
+            }
+
+            return Ok(users);
+        }
+
         // UPDATE
 
         // Updating the user by username (.../user/{username})

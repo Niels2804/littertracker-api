@@ -95,7 +95,6 @@ namespace trashtracker_api.Repositories
             );
         }
 
-
         public async Task<Litter?> GetByLitterIdAsync(string litterId)
         {
             var sql = @"

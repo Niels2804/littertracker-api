@@ -28,8 +28,7 @@ namespace trashtracker_api.Repositories
                     SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
                     FROM [dbo].[Users] 
                     WHERE IdentityUserId = @IdentityUserId";
-            var user = await _dbConnection.QuerySingleOrDefaultAsync<User>(sql, new { IdentityUserId = identityUserId });
-            return user;
+            return await _dbConnection.QuerySingleOrDefaultAsync<User>(sql, new { IdentityUserId = identityUserId });
         }
 
         public async Task<User> GetUserAsync(string username)
@@ -38,8 +37,15 @@ namespace trashtracker_api.Repositories
                     SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
                     FROM [dbo].[Users] 
                     WHERE Username = @Username";
-            var user = await _dbConnection.QuerySingleOrDefaultAsync<User>(sql, new { Username = username });
-            return user;
+            return await _dbConnection.QuerySingleOrDefaultAsync<User>(sql, new { Username = username });
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            var sql = @"
+                    SELECT Id, IdentityUserId, Email, Password, Username, FirstName, LastName, Role
+                    FROM [dbo].[Users]";
+            return await _dbConnection.QueryAsync<User>(sql);
         }
 
         public async Task UpdateUserAsync(User user)
