@@ -47,7 +47,7 @@ namespace trashtracker_api.Controllers
         // API to get all existing users (.../user)
 
         [HttpGet("id/{identityUserId}", Name = "GetUserById")]
-        [Authorize]
+        [AllowAnonymous] // Must be Authorize later
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<User>> GetUserById(string identityUserId)
@@ -93,7 +93,7 @@ namespace trashtracker_api.Controllers
         // Updating the user by username (.../user/{username})
 
         [HttpPut("UpdateUser")]
-        [Authorize]
+        [AllowAnonymous] // Must be Authorize later
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -123,7 +123,7 @@ namespace trashtracker_api.Controllers
         // Delete user by authentication ID (.../user/{authenticationId})
 
         [HttpDelete("{authenticationId}", Name = "DeleteUserById")]
-        [Authorize]
+        [AllowAnonymous] // Must be Authorize later
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(string authenticationId)

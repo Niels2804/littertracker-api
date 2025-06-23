@@ -20,7 +20,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
 
         [HttpGet("GetAllLitterFromSensoring")]
-        [Authorize]
+        [AllowAnonymous] // Must be Authorize later
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Litter>>> GetAllLitterDataFromSensoring()
@@ -35,7 +35,7 @@ namespace trashtracker_api.Controllers
         }
 
         [HttpGet("GetLitterFromSensoring")]
-        [Authorize]
+        [AllowAnonymous] // Must be Authorize later
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
