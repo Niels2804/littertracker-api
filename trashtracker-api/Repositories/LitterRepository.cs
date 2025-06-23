@@ -56,7 +56,8 @@ namespace trashtracker_api.Repositories
                         l.Id, l.Classification, l.Confidence, l.LocationLatitude, l.LocationLongitude, l.DetectionTime,
                         w.Id, w.TemperatureCelsius, w.Humidity, w.Conditions
                     FROM [dbo].[Litters] l
-                    JOIN [dbo].[WeatherInfo] w ON l.Id = w.Id";
+                    JOIN [dbo].[WeatherInfo] w ON l.Id = w.Id
+                    WHERE l.DetectionTime >= '2025-06-20T00:00:00'";
 
             var result = await _dbConnection.QueryAsync<Litter, WeatherInfo, Litter>(
                 sql,
