@@ -19,7 +19,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
 
         [HttpGet("{litterId}", Name = "GetByLitterId")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Litter>> GetByLitterId([FromRoute] string litterId)
@@ -33,7 +33,7 @@ namespace trashtracker_api.Controllers
         }
 
         [HttpGet("GetAllLitter")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Litter>> GetAllLitter()
@@ -49,7 +49,7 @@ namespace trashtracker_api.Controllers
         // POST / CREATE
 
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Litter))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Litter>> CreateLitter([FromBody] Litter litter)
@@ -72,7 +72,7 @@ namespace trashtracker_api.Controllers
         // PUT / UPDATE
 
         [HttpPut("{litterId}")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Litter))]
         public async Task<ActionResult<Litter>> UpdateLitter([FromRoute] string litterId, [FromBody] Litter litter)
@@ -93,7 +93,7 @@ namespace trashtracker_api.Controllers
         // DELETE
 
         [HttpDelete("{litterId}")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> DeleteLitter([FromRoute] string litterId)

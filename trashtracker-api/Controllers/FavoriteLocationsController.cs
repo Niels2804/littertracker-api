@@ -19,7 +19,7 @@ namespace trashtracker_api.Controllers
         // POST / CREATE
 
         [HttpPost(Name = "CreateFavoriteLocation")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -59,7 +59,7 @@ namespace trashtracker_api.Controllers
         // GET / READ
 
         [HttpGet("{identityUserId}", Name = "GetFavoriteLocationsByUserId")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -83,7 +83,7 @@ namespace trashtracker_api.Controllers
         // UPDATE
 
         [HttpPut("{favoriteLocationId}", Name = "UpdateFavoriteLocationsById")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -114,7 +114,7 @@ namespace trashtracker_api.Controllers
         // DELETE
 
         [HttpDelete("{userId}", Name = "DeleteAllFavoriteLocation")]
-        [Authorize]
+        [AllowAnonymous] // Must be authorize later
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteAllFavoriteLocation(string userId)
