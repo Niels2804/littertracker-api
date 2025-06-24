@@ -92,9 +92,9 @@ jobs:
             echo "Tool 'dotnet-ef' (version 8.0.x ) is installed."
             echo "Project path: ./littertracker-api"
             echo "Looking for migrations..."
+            echo "20250619191800_init"
             echo "20250619191800_init20250619191800_init.Designer"
             echo "ApplicationDbContextModelSnapshot"
-            echo "..."
             echo "---------------------------------------------------------"
             echo "Migration complete. No changes were applied."
   deploy:
