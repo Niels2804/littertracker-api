@@ -82,6 +82,7 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ env.PUBLISH_DIRECTORY }}
   migrations:
+    runs-on: ubuntu-latest
     steps:
       - name: Run migrations
         run: |
